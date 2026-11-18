@@ -1,0 +1,252 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biz bilan aloqa | Django Market</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+        }
+        /* Django {{ form.field }} input va textarea maydonlarini avtomatik stillash */
+        .django-field input,
+        .django-field textarea,
+        .django-field select {
+            width: 100%;
+            background-color: #F4F4F6;
+            border: 1.5px solid transparent;
+            border-radius: 1rem;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.875rem;
+            color: #111113;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .django-field input:focus,
+        .django-field textarea:focus,
+        .django-field select:focus {
+            background-color: #FFFFFF;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+        }
+        .django-field textarea {
+            min-height: 130px;
+            resize: vertical;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-[#8B5CF6] selection:text-white">
+
+    <!-- Header (Bosh sahifa bilan bir xil uslubda) -->
+    <header class="sticky top-0 z-40 bg-[#F4F4F6]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+            
+            <!-- Chap: To'liq Django Market brend nomi -->
+            <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
+                <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                </span>
+                <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                    Django Market
+                </span>
+            </a>
+
+            <!-- Markaziy Pill Navigatsiya ("Aloqa" aktiv holatda) -->
+            <nav class="hidden md:flex items-center gap-1 bg-white p-1.5 rounded-full border border-black/5 shadow-xs text-xs font-semibold">
+                <a href="{% url 'core:home' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                    Bosh sahifa
+                </a>
+                <a href="{% url 'core:home' %}#categories" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                    Kategoriyalar
+                </a>
+                <a href="{% url 'core:home' %}#products" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                    Mahsulotlar
+                </a>
+                <span class="bg-[#111113] text-white px-4 py-2 rounded-full shadow-xs">
+                    Aloqa
+                </span>
+            </nav>
+
+            <!-- O'ng: Bosh sahifaga qaytish -->
+            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition">
+                ← Bosh sahifaga
+            </a>
+
+        </div>
+    </header>
+
+    <!-- Asosiy Kontent (Bento Grid: Chapda ma'lumot kartochkalari, O'ngda Forma) -->
+    <main class="max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+            <!-- Chap ustun: Bento Aloqa Ma'lumotlari (5 ustun) -->
+            <div class="lg:col-span-5 space-y-5">
+
+                <!-- Asosiy binafsha info-karta -->
+                <div class="rounded-[1.75rem] bg-[#8B5CF6] text-white p-7 sm:p-8 shadow-lg shadow-[#8B5CF6]/15">
+                    <span class="inline-block bg-white/15 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full">
+                        24/7 Qo‘llab-quvvatlash
+                    </span>
+
+                    <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.12]">
+                        Biz bilan <br> bog‘laning
+                    </h1>
+
+                    <p class="mt-3 text-xs sm:text-sm text-purple-100 leading-relaxed">
+                        Buyurtmalar, hamkorlik yoki takliflar bo‘yicha savolingiz bormi? Xabar qoldiring — mutaxassislarimiz tez orada javob berishadi.
+                    </p>
+                </div>
+
+                <!-- Aloqa kanallari (2 ta kichik Bento karta) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
+                    <div class="bento-card p-5 flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#F96248]/10 text-[#F96248] flex items-center justify-center text-lg shrink-0">
+                            📞
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Telefon raqam</p>
+                            <p class="text-sm font-extrabold text-[#111113] mt-0.5">+998 90 123 45 67</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card p-5 flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-lg shrink-0">
+                            ✉️
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Elektron pochta</p>
+                            <p class="text-sm font-extrabold text-[#111113] mt-0.5">info@djangomarket.uz</p>
+                        </div>
+                    </div>
+
+                    <div class="bento-card p-5 flex items-center gap-4">
+                        <div class="w-11 h-11 rounded-2xl bg-[#111113] text-white flex items-center justify-center text-lg shrink-0">
+                            📍
+                        </div>
+                        <div>
+                            <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Manzil</p>
+                            <p class="text-sm font-extrabold text-[#111113] mt-0.5">Toshkent sh., Olmazor tumani</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- O'ng ustun: Django Aloqa Formasi (7 ustun) -->
+            <div class="lg:col-span-7 bento-card p-6 sm:p-10">
+
+                <div class="mb-7">
+                    <h2 class="text-2xl font-extrabold tracking-tight text-[#111113]">
+                        Xabar yuborish
+                    </h2>
+                    <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+                        Barcha maydonlarni to‘ldiring, biz siz bilan bog‘lanamiz.
+                    </p>
+                </div>
+
+                <!-- Django Messages -->
+                {% if messages %}
+                    <div class="space-y-3 mb-6">
+                        {% for message in messages %}
+                            <div class="flex items-center gap-3 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold p-4 rounded-2xl">
+                                <span class="w-6 h-6 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs shrink-0">✓</span>
+                                <span>{{ message }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Umumiy forma xatoliklari (agar bo'lsa) -->
+                {% if form.non_field_errors %}
+                    <div class="bg-red-50 border border-red-200 text-red-700 text-xs p-4 rounded-2xl mb-6">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="space-y-5">
+                    {% csrf_token %}
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <!-- Ismingiz -->
+                        <div class="django-field">
+                            <label for="{{ form.name.id_for_label }}" class="block text-xs font-bold text-[#111113] mb-2">
+                                Ismingiz
+                            </label>
+                            {{ form.name }}
+                            {% for error in form.name.errors %}
+                                <p class="text-[#F96248] text-xs font-semibold mt-1.5">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+
+                        <!-- Email manzilingiz -->
+                        <div class="django-field">
+                            <label for="{{ form.email.id_for_label }}" class="block text-xs font-bold text-[#111113] mb-2">
+                                Email manzilingiz
+                            </label>
+                            {{ form.email }}
+                            {% for error in form.email.errors %}
+                                <p class="text-[#F96248] text-xs font-semibold mt-1.5">{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <!-- Xabaringiz -->
+                    <div class="django-field">
+                        <label for="{{ form.message.id_for_label }}" class="block text-xs font-bold text-[#111113] mb-2">
+                            Xabaringiz
+                        </label>
+                        {{ form.message }}
+                        {% for error in form.message.errors %}
+                            <p class="text-[#F96248] text-xs font-semibold mt-1.5">{{ error }}</p>
+                        {% endfor %}
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit"
+                                class="w-full bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs sm:text-sm font-bold py-4 px-6 rounded-full shadow-sm transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2">
+                            <span>Xabarni yuborish</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0B0B0D] text-white py-8 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+            <a href="{% url 'core:home' %}" class="font-extrabold text-white text-sm">
+                Django Market
+            </a>
+            <p>© 2026 Django Market. Barcha huquqlar himoyalangan.</p>
+        </div>
+    </footer>s
+
+</body>
+</html>

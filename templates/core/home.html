@@ -68,12 +68,12 @@
                        class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
                         Kategoriyalar
                     </a>
-                    <a href="#products"
+                    <a href="{% url 'products:list' %}"
                        data-target="products"
                        class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
                         Mahsulotlar
                     </a>
-                    <a href="#contact"
+                    <a href="{% url 'core:contact' %}"
                        data-target="contact"
                        class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
                         Aloqa
