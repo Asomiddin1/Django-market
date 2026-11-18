@@ -98,109 +98,178 @@
 
         <!-- 1. HERO CAROUSEL BO'LIMI -->
         <section id="home" class="scroll-mt-24 relative pb-10">
-            <div id="hero-carousel" class="relative overflow-hidden rounded-[2rem] shadow-sm border border-black/5">
+            <div id="hero-carousel" class="relative overflow-hidden rounded-[2.25rem] shadow-xl border border-black/5 group/carousel">
                 
                 <!-- Slaydlar konteyneri -->
-                <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+                <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out">
 
-                    <!-- SLAYD 1 -->
-                    <div class="w-full shrink-0 bg-[#8B5CF6] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
-                        <div class="lg:col-span-7 space-y-5">
-                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
+                    <!-- SLAYD 1: Premium Audio & Gadgetlar -->
+                    <div class="w-full shrink-0 relative bg-gradient-to-br from-[#7C3AED] via-[#6D28D9] to-[#4338CA] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[460px] sm:min-h-[500px] overflow-hidden">
+                        <!-- Orqa fon nurlari / glow -->
+                        <div class="absolute -top-24 -left-24 w-96 h-96 bg-pink-500/20 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-purple-400/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <div class="lg:col-span-7 space-y-5 relative z-10">
+                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xs border border-white/20">
                                 <span>🔥</span>
                                 <span>Yangi mavsum chegirmalari</span>
                             </span>
 
-                            <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
-                                Zamonaviy gadjetlar <br class="hidden sm:inline"> va texnikalar olami
+                            <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.08]">
+                                Zamonaviy gadjetlar <br class="hidden sm:inline"> va audio qurilmalar
                             </h1>
 
                             <p class="text-xs sm:text-sm text-purple-100 max-w-md leading-relaxed">
-                                Eng so‘nggi rusumdagi smartfon, noutbuk va audio qurilmalarni 25% gacha chegirma hamda tezkor yetkazib berish bilan xarid qiling.
+                                Eng so‘nggi rusumdagi original quloqchinlar, smartfonlar va aksessuarlarni 25% gacha chegirma hamda rasmiy kafolat bilan xarid qiling.
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="#products" class="bg-white text-[#111113] hover:bg-neutral-100 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                <a href="{% url 'products:list' %}" class="bg-white text-[#111113] hover:bg-neutral-100 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                                     Xarid qilish →
                                 </a>
-                                <a href="#categories" class="bg-white/15 hover:bg-white/25 text-white text-xs font-bold px-6 py-3.5 rounded-full transition">
+                                <a href="{% url 'categories:list' %}" class="bg-white/15 hover:bg-white/25 text-white border border-white/20 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
                                     Kategoriyalar
                                 </a>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-5 flex items-center justify-center">
-                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/15 border border-white/20 backdrop-blur-md flex flex-col items-center justify-center shadow-2xl">
-                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">🎧</span>
-                                <span class="mt-3 bg-[#111113] text-white text-[11px] font-bold px-3.5 py-1 rounded-full">
+                        <!-- O'ng tomon: Professional mahsulot kartochkasi -->
+                        <div class="lg:col-span-5 flex items-center justify-center relative z-10">
+                            <div class="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-sm group">
+                                <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?auto=format&fit=crop&w=900&q=80"
+                                     alt="Premium Headphones"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+
+                                <!-- Floating Badge 1 -->
+                                <span class="absolute top-3.5 left-3.5 bg-[#F96248] text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
                                     -25% Chegirma
                                 </span>
+
+                                <!-- Floating Badge 2 -->
+                                <div class="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-xs font-bold">
+                                    <span class="bg-white/90 backdrop-blur-md text-[#111113] px-3 py-1 rounded-full shadow-sm">
+                                        Wireless Studio Pro
+                                    </span>
+                                    <span class="bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-full">
+                                        ★ 4.9
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLAYD 2 -->
-                    <div class="w-full shrink-0 bg-[#F96248] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
-                        <div class="lg:col-span-7 space-y-5">
-                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
+                    <!-- SLAYD 2: Noutbuklar va ish stantsiyalari -->
+                    <div class="w-full shrink-0 relative bg-gradient-to-br from-[#EA580C] via-[#F97316] to-[#C2410C] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[460px] sm:min-h-[500px] overflow-hidden">
+                        <!-- Orqa fon nurlari / glow -->
+                        <div class="absolute -top-24 -left-24 w-96 h-96 bg-yellow-400/20 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <div class="lg:col-span-7 space-y-5 relative z-10">
+                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xs border border-white/20">
                                 <span>⚡</span>
                                 <span>0% Boshlang‘ich to‘lov</span>
                             </span>
 
-                            <h2 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
+                            <h2 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.08]">
                                 Orzuingizdagi noutbuk <br class="hidden sm:inline"> 12 oyga bo‘lib to‘lashga
                             </h2>
 
                             <p class="text-xs sm:text-sm text-orange-100 max-w-md leading-relaxed">
-                                Dasturlash, dizayn va o‘yinlar uchun kuchli noutbuklarni ortiqcha hujjatlarsiz 15 daqiqada rasmiylashtiring.
+                                Dasturlash, dizayn va o‘yinlar uchun kuchli MacBook hamda noutbuklarni ortiqcha hujjatlarsiz 15 daqiqada rasmiylashtiring.
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="#products" class="bg-[#111113] text-white hover:bg-neutral-800 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white hover:bg-neutral-900 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg transition-all duration-300">
                                     Modellarni ko‘rish →
+                                </a>
+                                <a href="{% url 'categories:list' %}" class="bg-white/15 hover:bg-white/25 text-white border border-white/20 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
+                                    Barcha toifalar
                                 </a>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-5 flex items-center justify-center">
-                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/15 border border-white/20 backdrop-blur-md flex flex-col items-center justify-center shadow-2xl">
-                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">💻</span>
-                                <span class="mt-3 bg-white text-[#F96248] text-[11px] font-extrabold px-3.5 py-1 rounded-full">
-                                    12 oy muddatli to‘lov
+                        <!-- O'ng tomon: Noutbuk kartochkasi -->
+                        <div class="lg:col-span-5 flex items-center justify-center relative z-10">
+                            <div class="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-sm group">
+                                <img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=900&q=80"
+                                     alt="MacBook Pro"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+
+                                <!-- Floating Badge 1 -->
+                                <span class="absolute top-3.5 left-3.5 bg-white text-[#EA580C] text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
+                                    0% Boshlang‘ich to‘lov
                                 </span>
+
+                                <!-- Floating Badge 2 -->
+                                <div class="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-xs font-bold">
+                                    <span class="bg-white/90 backdrop-blur-md text-[#111113] px-3 py-1 rounded-full shadow-sm">
+                                        MacBook Pro M3 Max
+                                    </span>
+                                    <span class="bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-full">
+                                        12 oyga bo‘lib to‘lash
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- SLAYD 3 -->
-                    <div class="w-full shrink-0 bg-[#111113] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
-                        <div class="lg:col-span-7 space-y-5">
-                            <span class="inline-flex items-center gap-2 bg-white/10 text-neutral-200 text-xs font-bold px-3.5 py-1.5 rounded-full">
+                    <!-- SLAYD 3: Aqlli soatlar va original mahsulotlar -->
+                    <div class="w-full shrink-0 relative bg-gradient-to-br from-[#0B0F19] via-[#1E293B] to-[#0F172A] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[460px] sm:min-h-[500px] overflow-hidden">
+                        <!-- Orqa fon nurlari / glow -->
+                        <div class="absolute -top-24 -left-24 w-96 h-96 bg-purple-500/15 rounded-full blur-3xl pointer-events-none"></div>
+                        <div class="absolute -bottom-24 right-1/4 w-96 h-96 bg-blue-500/15 rounded-full blur-3xl pointer-events-none"></div>
+
+                        <div class="lg:col-span-7 space-y-5 relative z-10">
+                            <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-neutral-200 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs border border-white/10">
                                 <span>🚚</span>
                                 <span>O‘zbekiston bo‘ylab tezkor yetkazish</span>
                             </span>
 
-                            <h2 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
-                                Barcha xaridlaringiz <br class="hidden sm:inline"> bir joyda va ishonchli
+                            <h2 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight leading-[1.08]">
+                                Apple Watch va <br class="hidden sm:inline"> aqlli aksessuarlar
                             </h2>
 
-                            <p class="text-xs sm:text-sm text-neutral-400 max-w-md leading-relaxed">
-                                15 000 dan ortiq original mahsulotlar, rasmiy kafolat va kunu-tun qo‘llab-quvvatlash xizmati.
+                            <p class="text-xs sm:text-sm text-neutral-300 max-w-md leading-relaxed">
+                                Kundalik faollik, salomatlik nazorati va qulay hayot uchun premium soatlar. 100% original mahsulotlar kafolati.
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="#products" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                <a href="{% url 'products:list' %}" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
                                     Katalogni ochish →
+                                </a>
+                                <a href="{% url 'categories:list' %}" class="bg-white/10 hover:bg-white/20 text-white border border-white/15 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
+                                    Barcha toifalar
                                 </a>
                             </div>
                         </div>
 
-                        <div class="lg:col-span-5 flex items-center justify-center">
-                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center shadow-2xl">
-                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">⌚</span>
-                                <span class="mt-3 bg-[#F96248] text-white text-[11px] font-bold px-3.5 py-1 rounded-full">
-                                    100% Original
+                        <!-- O'ng tomon: Smartwatch kartochkasi -->
+                        <div class="lg:col-span-5 flex items-center justify-center relative z-10">
+                            <div class="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-white/10 backdrop-blur-sm group">
+                                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=900&q=80"
+                                     alt="Smartwatch"
+                                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                                
+                                <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
+
+                                <!-- Floating Badge 1 -->
+                                <span class="absolute top-3.5 left-3.5 bg-emerald-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
+                                    ✓ 100% Original
                                 </span>
+
+                                <!-- Floating Badge 2 -->
+                                <div class="absolute bottom-3.5 left-3.5 right-3.5 flex items-center justify-between text-xs font-bold">
+                                    <span class="bg-white/90 backdrop-blur-md text-[#111113] px-3 py-1 rounded-full shadow-sm">
+                                        Smart Edition Watch
+                                    </span>
+                                    <span class="bg-black/60 backdrop-blur-md text-white px-2.5 py-1 rounded-full">
+                                        24 soatda yetkazish
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -208,19 +277,23 @@
                 </div>
 
                 <!-- Pastki boshqaruv paneli -->
-                <div class="absolute bottom-5 left-8 right-8 flex items-center justify-between pointer-events-none">
-                    <div id="carousel-dots" class="flex items-center gap-2 pointer-events-auto bg-black/20 backdrop-blur-md px-3 py-2 rounded-full">
-                        <button type="button" data-slide="0" aria-label="1-slayd" class="carousel-dot w-6 h-2 rounded-full bg-white transition-all cursor-pointer"></button>
-                        <button type="button" data-slide="1" aria-label="2-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all cursor-pointer"></button>
-                        <button type="button" data-slide="2" aria-label="3-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all cursor-pointer"></button>
+                <div class="absolute bottom-6 left-8 right-8 flex items-center justify-between pointer-events-none z-20">
+                    <div id="carousel-dots" class="flex items-center gap-2 pointer-events-auto bg-black/30 backdrop-blur-md px-3.5 py-2 rounded-full border border-white/10">
+                        <button type="button" data-slide="0" aria-label="1-slayd" class="carousel-dot w-6 h-2 rounded-full bg-white transition-all duration-300 cursor-pointer"></button>
+                        <button type="button" data-slide="1" aria-label="2-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all duration-300 cursor-pointer"></button>
+                        <button type="button" data-slide="2" aria-label="3-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all duration-300 cursor-pointer"></button>
                     </div>
 
                     <div class="flex items-center gap-2 pointer-events-auto">
-                        <button type="button" id="prev-slide" aria-label="Oldingi slayd" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#111113] backdrop-blur-md flex items-center justify-center font-bold transition cursor-pointer">
-                            ‹
+                        <button type="button" id="prev-slide" aria-label="Oldingi slayd" class="w-10 h-10 rounded-full bg-black/30 hover:bg-white text-white hover:text-[#111113] border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+                            </svg>
                         </button>
-                        <button type="button" id="next-slide" aria-label="Keyingi slayd" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#111113] backdrop-blur-md flex items-center justify-center font-bold transition cursor-pointer">
-                            ›
+                        <button type="button" id="next-slide" aria-label="Keyingi slayd" class="w-10 h-10 rounded-full bg-black/30 hover:bg-white text-white hover:text-[#111113] border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
+                            </svg>
                         </button>
                     </div>
                 </div>
@@ -299,71 +372,33 @@
                         Barcha bo‘limlar bo‘yicha saralangan sifatli mahsulotlar to‘plami.
                     </p>
                 </div>
-                <a href="#" class="bg-white border border-black/10 hover:bg-[#111113] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition">
+                <a href="{% url 'categories:list' %}" class="bg-white border border-black/10 hover:bg-[#111113] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition">
                     Barcha kategoriyalar →
                 </a>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
+                {% for category in categories %}
+                <a href="{% url 'products:list' %}?category={{ category.id }}" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
                     <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl group-hover:bg-[#8B5CF6] group-hover:text-white transition">
-                        📱
+                        {% if "apple" in category.name|lower or "telefon" in category.name|lower %}📱
+                        {% elif "mebel" in category.name|lower %}🛋️
+                        {% elif "kiyim" in category.name|lower %}👕
+                        {% elif "poyabzal" in category.name|lower %}👟
+                        {% elif "turizm" in category.name|lower or "baliq" in category.name|lower %}🏕️
+                        {% elif "texnika" in category.name|lower %}📺
+                        {% else %}📦{% endif %}
                     </span>
                     <div>
-                        <h3 class="font-bold text-sm text-[#111113]">Elektronika</h3>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">240+ mahsulot</p>
+                        <h3 class="font-bold text-sm text-[#111113]">{{ category.name }}</h3>
+                        <p class="text-[11px] text-neutral-400 mt-0.5">{{ category.products.count }} mahsulot</p>
                     </div>
                 </a>
-
-                <a href="#" class="rounded-[1.75rem] bg-[#8B5CF6] text-white p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition shadow-md shadow-[#8B5CF6]/15">
-                    <span class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-xl">
-                        👕
-                    </span>
-                    <div>
-                        <h3 class="font-bold text-sm">Kiyimlar</h3>
-                        <p class="text-[11px] text-purple-100 mt-0.5">580+ mahsulot</p>
-                    </div>
-                </a>
-
-                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
-                    <span class="w-10 h-10 rounded-2xl bg-[#F96248]/10 text-[#F96248] flex items-center justify-center text-xl group-hover:bg-[#F96248] group-hover:text-white transition">
-                        🏠
-                    </span>
-                    <div>
-                        <h3 class="font-bold text-sm text-[#111113]">Uy jihozlari</h3>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">190+ mahsulot</p>
-                    </div>
-                </a>
-
-                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
-                    <span class="w-10 h-10 rounded-2xl bg-neutral-100 flex items-center justify-center text-xl group-hover:bg-[#111113] transition">
-                        📚
-                    </span>
-                    <div>
-                        <h3 class="font-bold text-sm text-[#111113]">Kitoblar</h3>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">410+ mahsulot</p>
-                    </div>
-                </a>
-
-                <a href="#" class="rounded-[1.75rem] bg-[#F96248] text-white p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition shadow-md shadow-[#F96248]/15">
-                    <span class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-xl">
-                        ⚽
-                    </span>
-                    <div>
-                        <h3 class="font-bold text-sm">Sport</h3>
-                        <p class="text-[11px] text-orange-100 mt-0.5">135+ mahsulot</p>
-                    </div>
-                </a>
-
-                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
-                    <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl group-hover:bg-[#8B5CF6] group-hover:text-white transition">
-                        🎮
-                    </span>
-                    <div>
-                        <h3 class="font-bold text-sm text-[#111113]">O‘yinlar</h3>
-                        <p class="text-[11px] text-neutral-400 mt-0.5">95+ mahsulot</p>
-                    </div>
-                </a>
+                {% empty %}
+                <div class="col-span-full py-8 text-center text-sm text-neutral-500">
+                    Kategoriyalar mavjud emas
+                </div>
+                {% endfor %}
             </div>
         </section>
 
@@ -376,38 +411,47 @@
                     </h2>
                     <p class="text-xs text-neutral-500 mt-1">Eng ko‘p xarid qilinayotgan top modellar</p>
                 </div>
-                <a href="#" class="bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition">
+                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition">
                     Barchasi →
                 </a>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
                  {% for product in products %}
-                <!-- Product 1 -->
+                <!-- Product Card -->
                 <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
                     <div>
                         <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
-                            <span class="group-hover:scale-110 transition duration-300">📱</span>
+                            {% if product.image %}
+                                <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                            {% else %}
+                                <span class="group-hover:scale-110 transition duration-300">📱</span>
+                            {% endif %}
                             <span class="absolute top-3 left-3 bg-[#111113] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
                                 Yangi
                             </span>
                         </div>
                         <div class="mt-4 px-1">
+                            <span class="text-[11px] font-semibold text-[#8B5CF6]">{{ product.category.name }}</span>
                             <h3 class="font-extrabold text-base text-[#111113]">{{ product.name }}</h3>
-                            <p class="text-neutral-500 text-xs mt-1">{{ product.description }}</p>
+                            <p class="text-neutral-500 text-xs mt-1 line-clamp-2">{{ product.description }}</p>
                         </div>
                     </div>
 
                     <div class="mt-5 px-1">
                         <div class="text-lg font-extrabold text-[#111113]">
-                           {{product.price}}<span class="text-xs font-semibold text-neutral-500">$</span>
+                           {{ product.price }} <span class="text-xs font-semibold text-neutral-500">$</span>
                         </div>
                         <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shishs
+                            Savatga qo‘shish
                         </button>
                     </div>
                 </article>
-                 {% endfor %}
+                {% empty %}
+                <div class="col-span-full py-8 text-center text-sm text-neutral-500">
+                    Mahsulotlar mavjud emas
+                </div>
+                {% endfor %}
 
             </div>
         </section>
