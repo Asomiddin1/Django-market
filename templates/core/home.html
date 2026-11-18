@@ -1,0 +1,698 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Django Market — Zamonaviy Onlayn Do‘kon</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+        }
+        /* Aktiv navigatsiya kapsulasi uchun silliq animatsiya */
+        #nav-pill {
+            transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+                        width 0.38s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#8B5CF6] selection:text-white">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#F4F4F6]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+            
+            <!-- Chap: To'liq Django Market brend nomi + Animatsiyali Pill navigatsiya -->
+            <div class="flex items-center gap-4 lg:gap-6">
+                <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
+                    <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                        Django Market
+                    </span>
+                </a>
+
+                <nav id="main-nav" class="relative hidden md:flex items-center bg-white p-1.5 rounded-full border border-black/5 shadow-xs text-xs font-semibold">
+                    <!-- Harakatlanuvchi qora active indikator -->
+                    <span id="nav-pill" class="absolute top-1.5 bottom-1.5 left-0 bg-[#111113] rounded-full pointer-events-none z-0"></span>
+
+                    <a href="#home"
+                       data-target="home"
+                       class="nav-link relative z-10 px-4 py-2 rounded-full text-white transition-colors duration-300">
+                        Bosh sahifa
+                    </a>
+                    <a href="#features"
+                       data-target="features"
+                       class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
+                        Afzalliklar
+                    </a>
+                    <a href="#categories"
+                       data-target="categories"
+                       class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
+                        Kategoriyalar
+                    </a>
+                    <a href="#products"
+                       data-target="products"
+                       class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
+                        Mahsulotlar
+                    </a>
+                    <a href="#contact"
+                       data-target="contact"
+                       class="nav-link relative z-10 px-4 py-2 rounded-full text-neutral-600 hover:text-black transition-colors duration-300">
+                        Aloqa
+                    </a>
+                </nav>
+            </div>
+
+            <!-- O'ng: Savat va Kirish -->
+            <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
+                <a href="#" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+                    <span>Savat</span>
+                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">2</span>
+                </a>
+                <a href="#" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                    Kirish
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 pb-20">
+
+        <!-- 1. HERO CAROUSEL BO'LIMI -->
+        <section id="home" class="scroll-mt-24 relative pb-10">
+            <div id="hero-carousel" class="relative overflow-hidden rounded-[2rem] shadow-sm border border-black/5">
+                
+                <!-- Slaydlar konteyneri -->
+                <div id="carousel-track" class="flex transition-transform duration-500 ease-out">
+
+                    <!-- SLAYD 1 -->
+                    <div class="w-full shrink-0 bg-[#8B5CF6] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
+                        <div class="lg:col-span-7 space-y-5">
+                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
+                                <span>🔥</span>
+                                <span>Yangi mavsum chegirmalari</span>
+                            </span>
+
+                            <h1 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
+                                Zamonaviy gadjetlar <br class="hidden sm:inline"> va texnikalar olami
+                            </h1>
+
+                            <p class="text-xs sm:text-sm text-purple-100 max-w-md leading-relaxed">
+                                Eng so‘nggi rusumdagi smartfon, noutbuk va audio qurilmalarni 25% gacha chegirma hamda tezkor yetkazib berish bilan xarid qiling.
+                            </p>
+
+                            <div class="pt-2 flex flex-wrap items-center gap-3">
+                                <a href="#products" class="bg-white text-[#111113] hover:bg-neutral-100 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                    Xarid qilish →
+                                </a>
+                                <a href="#categories" class="bg-white/15 hover:bg-white/25 text-white text-xs font-bold px-6 py-3.5 rounded-full transition">
+                                    Kategoriyalar
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex items-center justify-center">
+                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/15 border border-white/20 backdrop-blur-md flex flex-col items-center justify-center shadow-2xl">
+                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">🎧</span>
+                                <span class="mt-3 bg-[#111113] text-white text-[11px] font-bold px-3.5 py-1 rounded-full">
+                                    -25% Chegirma
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLAYD 2 -->
+                    <div class="w-full shrink-0 bg-[#F96248] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
+                        <div class="lg:col-span-7 space-y-5">
+                            <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-xs text-white text-xs font-bold px-3.5 py-1.5 rounded-full">
+                                <span>⚡</span>
+                                <span>0% Boshlang‘ich to‘lov</span>
+                            </span>
+
+                            <h2 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
+                                Orzuingizdagi noutbuk <br class="hidden sm:inline"> 12 oyga bo‘lib to‘lashga
+                            </h2>
+
+                            <p class="text-xs sm:text-sm text-orange-100 max-w-md leading-relaxed">
+                                Dasturlash, dizayn va o‘yinlar uchun kuchli noutbuklarni ortiqcha hujjatlarsiz 15 daqiqada rasmiylashtiring.
+                            </p>
+
+                            <div class="pt-2 flex flex-wrap items-center gap-3">
+                                <a href="#products" class="bg-[#111113] text-white hover:bg-neutral-800 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                    Modellarni ko‘rish →
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex items-center justify-center">
+                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/15 border border-white/20 backdrop-blur-md flex flex-col items-center justify-center shadow-2xl">
+                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">💻</span>
+                                <span class="mt-3 bg-white text-[#F96248] text-[11px] font-extrabold px-3.5 py-1 rounded-full">
+                                    12 oy muddatli to‘lov
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SLAYD 3 -->
+                    <div class="w-full shrink-0 bg-[#111113] text-white p-8 sm:p-12 lg:p-16 grid grid-cols-1 lg:grid-cols-12 items-center gap-8 min-h-[420px]">
+                        <div class="lg:col-span-7 space-y-5">
+                            <span class="inline-flex items-center gap-2 bg-white/10 text-neutral-200 text-xs font-bold px-3.5 py-1.5 rounded-full">
+                                <span>🚚</span>
+                                <span>O‘zbekiston bo‘ylab tezkor yetkazish</span>
+                            </span>
+
+                            <h2 class="text-3xl sm:text-5xl lg:text-[52px] font-extrabold tracking-tight leading-[1.08]">
+                                Barcha xaridlaringiz <br class="hidden sm:inline"> bir joyda va ishonchli
+                            </h2>
+
+                            <p class="text-xs sm:text-sm text-neutral-400 max-w-md leading-relaxed">
+                                15 000 dan ortiq original mahsulotlar, rasmiy kafolat va kunu-tun qo‘llab-quvvatlash xizmati.
+                            </p>
+
+                            <div class="pt-2 flex flex-wrap items-center gap-3">
+                                <a href="#products" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-extrabold px-6 py-3.5 rounded-full shadow-md transition">
+                                    Katalogni ochish →
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex items-center justify-center">
+                            <div class="w-56 h-56 sm:w-68 sm:h-68 rounded-[2rem] bg-white/5 border border-white/10 flex flex-col items-center justify-center shadow-2xl">
+                                <span class="text-8xl sm:text-9xl drop-shadow-lg select-none">⌚</span>
+                                <span class="mt-3 bg-[#F96248] text-white text-[11px] font-bold px-3.5 py-1 rounded-full">
+                                    100% Original
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Pastki boshqaruv paneli -->
+                <div class="absolute bottom-5 left-8 right-8 flex items-center justify-between pointer-events-none">
+                    <div id="carousel-dots" class="flex items-center gap-2 pointer-events-auto bg-black/20 backdrop-blur-md px-3 py-2 rounded-full">
+                        <button type="button" data-slide="0" aria-label="1-slayd" class="carousel-dot w-6 h-2 rounded-full bg-white transition-all cursor-pointer"></button>
+                        <button type="button" data-slide="1" aria-label="2-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all cursor-pointer"></button>
+                        <button type="button" data-slide="2" aria-label="3-slayd" class="carousel-dot w-2 h-2 rounded-full bg-white/45 hover:bg-white/75 transition-all cursor-pointer"></button>
+                    </div>
+
+                    <div class="flex items-center gap-2 pointer-events-auto">
+                        <button type="button" id="prev-slide" aria-label="Oldingi slayd" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#111113] backdrop-blur-md flex items-center justify-center font-bold transition cursor-pointer">
+                            ‹
+                        </button>
+                        <button type="button" id="next-slide" aria-label="Keyingi slayd" class="w-10 h-10 rounded-full bg-white/20 hover:bg-white text-white hover:text-[#111113] backdrop-blur-md flex items-center justify-center font-bold transition cursor-pointer">
+                            ›
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. STATISTIKA VA DO'KON VITRINASI -->
+        <section id="features" class="scroll-mt-24 mt-6 pt-10 border-t border-black/5">
+            <div class="grid grid-cols-1 md:grid-cols-3 items-center gap-6 mb-8">
+                <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111113]">
+                    Xarid qilishni <br> osonlashtiruvchi tizim
+                </h2>
+
+                <div class="text-center">
+                    <div class="text-4xl sm:text-5xl font-extrabold tracking-tight text-[#111113]">15 000+</div>
+                    <p class="text-xs text-neutral-500 font-medium mt-1">Faol mahsulotlar bazasi</p>
+                </div>
+
+                <p class="text-xs text-neutral-500 leading-relaxed md:text-right">
+                    Qulay qidiruv, tezkor savat va shaffof narxlar orqali kerakli mahsulotni bir necha soniyada toping.
+                </p>
+            </div>
+
+            <div class="bento-card p-6 sm:p-8">
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-neutral-100">
+                    <div class="flex items-center gap-2">
+                        <span class="w-3 h-3 rounded-full bg-[#F96248]"></span>
+                        <span class="w-3 h-3 rounded-full bg-[#8B5CF6]"></span>
+                        <span class="w-3 h-3 rounded-full bg-neutral-300"></span>
+                        <span class="ml-2 text-xs font-bold text-neutral-400">django-market.uz</span>
+                    </div>
+
+                    <div class="flex items-center gap-2 bg-[#F4F4F6] px-4 py-2 rounded-full text-xs text-neutral-500 w-full sm:w-72">
+                        <span>🔍</span>
+                        <span>Mahsulotlarni qidirish...</span>
+                    </div>
+                </div>
+
+                <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+                    <div class="bg-[#F4F4F6] rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#8B5CF6] text-white flex items-center justify-center text-xl">⚡</div>
+                        <div>
+                            <p class="text-xs text-neutral-500">Yetkazib berish</p>
+                            <p class="text-lg font-extrabold text-[#111113]">24 soat ichida</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#F4F4F6] rounded-2xl p-5 flex items-center gap-4">
+                        <div class="w-12 h-12 rounded-2xl bg-[#F96248] text-white flex items-center justify-center text-xl">🛡️</div>
+                        <div>
+                            <p class="text-xs text-neutral-500">Rasmiy kafolat</p>
+                            <p class="text-lg font-extrabold text-[#111113]">100% Original</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#111113] text-white rounded-2xl p-5 flex items-center justify-between">
+                        <div>
+                            <p class="text-xs text-neutral-400">Bo‘lib to‘lash</p>
+                            <p class="text-lg font-extrabold">0% Boshlang‘ich</p>
+                        </div>
+                        <span class="bg-[#F96248] text-white text-xs font-bold px-3 py-1 rounded-full">12 oy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. KATEGORIYALAR BENTO GRID -->
+        <section id="categories" class="scroll-mt-24 mt-16">
+            <div class="flex flex-wrap items-end justify-between gap-4 mb-8">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#111113]">
+                        Kategoriyalarni <br> kashf eting
+                    </h2>
+                    <p class="text-xs text-neutral-500 mt-2 max-w-sm">
+                        Barcha bo‘limlar bo‘yicha saralangan sifatli mahsulotlar to‘plami.
+                    </p>
+                </div>
+                <a href="#" class="bg-white border border-black/10 hover:bg-[#111113] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition">
+                    Barcha kategoriyalar →
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
+                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
+                    <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl group-hover:bg-[#8B5CF6] group-hover:text-white transition">
+                        📱
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm text-[#111113]">Elektronika</h3>
+                        <p class="text-[11px] text-neutral-400 mt-0.5">240+ mahsulot</p>
+                    </div>
+                </a>
+
+                <a href="#" class="rounded-[1.75rem] bg-[#8B5CF6] text-white p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition shadow-md shadow-[#8B5CF6]/15">
+                    <span class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-xl">
+                        👕
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm">Kiyimlar</h3>
+                        <p class="text-[11px] text-purple-100 mt-0.5">580+ mahsulot</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
+                    <span class="w-10 h-10 rounded-2xl bg-[#F96248]/10 text-[#F96248] flex items-center justify-center text-xl group-hover:bg-[#F96248] group-hover:text-white transition">
+                        🏠
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm text-[#111113]">Uy jihozlari</h3>
+                        <p class="text-[11px] text-neutral-400 mt-0.5">190+ mahsulot</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
+                    <span class="w-10 h-10 rounded-2xl bg-neutral-100 flex items-center justify-center text-xl group-hover:bg-[#111113] transition">
+                        📚
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm text-[#111113]">Kitoblar</h3>
+                        <p class="text-[11px] text-neutral-400 mt-0.5">410+ mahsulot</p>
+                    </div>
+                </a>
+
+                <a href="#" class="rounded-[1.75rem] bg-[#F96248] text-white p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition shadow-md shadow-[#F96248]/15">
+                    <span class="w-10 h-10 rounded-2xl bg-white/20 flex items-center justify-center text-xl">
+                        ⚽
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm">Sport</h3>
+                        <p class="text-[11px] text-orange-100 mt-0.5">135+ mahsulot</p>
+                    </div>
+                </a>
+
+                <a href="#" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
+                    <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl group-hover:bg-[#8B5CF6] group-hover:text-white transition">
+                        🎮
+                    </span>
+                    <div>
+                        <h3 class="font-bold text-sm text-[#111113]">O‘yinlar</h3>
+                        <p class="text-[11px] text-neutral-400 mt-0.5">95+ mahsulot</p>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- 4. MASHHUR MAHSULOTLAR -->
+        <section id="products" class="scroll-mt-24 mt-16">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-[#111113]">
+                        Mashhur mahsulotlar
+                    </h2>
+                    <p class="text-xs text-neutral-500 mt-1">Eng ko‘p xarid qilinayotgan top modellar</p>
+                </div>
+                <a href="#" class="bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition">
+                    Barchasi →
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+                <!-- Product 1 -->
+                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
+                    <div>
+                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                            <span class="group-hover:scale-110 transition duration-300">📱</span>
+                            <span class="absolute top-3 left-3 bg-[#111113] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                                Yangi
+                            </span>
+                        </div>
+                        <div class="mt-4 px-1">
+                            <h3 class="font-extrabold text-base text-[#111113]">Smartfon</h3>
+                            <p class="text-neutral-500 text-xs mt-1">Zamonaviy smartfon, 256GB</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 px-1">
+                        <div class="text-lg font-extrabold text-[#111113]">
+                            2 500 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
+                        </div>
+                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
+                            Savatga qo‘shish
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 2 -->
+                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
+                    <div>
+                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                            <span class="group-hover:scale-110 transition duration-300">🎧</span>
+                            <span class="absolute top-3 left-3 bg-[#F96248] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                                -24%
+                            </span>
+                        </div>
+                        <div class="mt-4 px-1">
+                            <h3 class="font-extrabold text-base text-[#111113]">Wireless Headphones</h3>
+                            <p class="text-neutral-500 text-xs mt-1">Simsiz quloqchin, Hi-Fi ovoz</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 px-1">
+                        <div class="flex items-baseline gap-2">
+                            <span class="text-lg font-extrabold text-[#111113]">450 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span></span>
+                            <span class="text-xs text-neutral-400 line-through">590 000</span>
+                        </div>
+                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
+                            Savatga qo‘shish
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 3 -->
+                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
+                    <div>
+                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                            <span class="group-hover:scale-110 transition duration-300">⌚</span>
+                        </div>
+                        <div class="mt-4 px-1">
+                            <h3 class="font-extrabold text-base text-[#111113]">Smart Watch</h3>
+                            <p class="text-neutral-500 text-xs mt-1">Aqlli soat, AMOLED ekran</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 px-1">
+                        <div class="text-lg font-extrabold text-[#111113]">
+                            650 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
+                        </div>
+                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
+                            Savatga qo‘shish
+                        </button>
+                    </div>
+                </article>
+
+                <!-- Product 4 -->
+                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
+                    <div>
+                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                            <span class="group-hover:scale-110 transition duration-300">💻</span>
+                            <span class="absolute top-3 left-3 bg-[#8B5CF6] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                                Hit
+                            </span>
+                        </div>
+                        <div class="mt-4 px-1">
+                            <h3 class="font-extrabold text-base text-[#111113]">Laptop</h3>
+                            <p class="text-neutral-500 text-xs mt-1">Kuchli noutbuk, 16GB RAM</p>
+                        </div>
+                    </div>
+
+                    <div class="mt-5 px-1">
+                        <div class="text-lg font-extrabold text-[#111113]">
+                            7 500 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
+                        </div>
+                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
+                            Savatga qo‘shish
+                        </button>
+                    </div>
+                </article>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. FOOTER (Toza va ixcham Django Market footeri) -->
+    <footer id="contact" class="scroll-mt-24 bg-[#0B0B0D] text-white pt-14 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 text-xs">
+                <div class="lg:col-span-2">
+                    <a href="{% url 'core:home' %}" class="inline-flex items-center gap-2.5">
+                        <span class="w-8 h-8 rounded-full bg-white text-[#111113] flex items-center justify-center">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                            </svg>
+                        </span>
+                        <span class="font-extrabold text-lg tracking-tight text-white">Django Market</span>
+                    </a>
+                    <p class="mt-3 text-neutral-400 leading-relaxed max-w-xs">
+                        Qulay va ishonchli onlayn xaridlar platformasi. Barcha mahsulotlar sifat nazoratidan o‘tgan.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-3">Sahifalar</h4>
+                    <ul class="space-y-2 text-neutral-400">
+                        <li><a href="#home" class="hover:text-white transition">Bosh sahifa</a></li>
+                        <li><a href="#categories" class="hover:text-white transition">Kategoriyalar</a></li>
+                        <li><a href="#products" class="hover:text-white transition">Mahsulotlar</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-3">Ma’lumot</h4>
+                    <ul class="space-y-2 text-neutral-400">
+                        <li><a href="#features" class="hover:text-white transition">Afzalliklar</a></li>
+                        <li><a href="#" class="hover:text-white transition">Yetkazib berish</a></li>
+                        <li><a href="#" class="hover:text-white transition">To‘lov usullari</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-3">Aloqa</h4>
+                    <ul class="space-y-2 text-neutral-400">
+                        <li>info@djangomarket.uz</li>
+                        <li>+998 90 123 45 67</li>
+                        <li>Toshkent, O‘zbekiston</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-neutral-500">
+                <p>© 2026 Django Market. Barcha huquqlar himoyalangan.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="hover:text-white transition">Maxfiylik siyosati</a>
+                    <a href="#" class="hover:text-white transition">Foydalanish shartlari</a>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <!-- Carousel va Animatsiyali Active Link JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            /* --- 1. ANIMATSIYALI ACTIVE PILL NAVIGATION --- */
+            const navLinks = document.querySelectorAll('.nav-link');
+            const navPill = document.getElementById('nav-pill');
+            let isManualClick = false;
+            let clickTimeout;
+
+            function setActiveLink(activeLink) {
+                if (!activeLink || !navPill) return;
+
+                // Qora kapsulani bosilgan/aktiv link o'lchami va joyiga silliq ko'chirish
+                navPill.style.width = `${activeLink.offsetWidth}px`;
+                navPill.style.transform = `translateX(${activeLink.offsetLeft}px)`;
+
+                // Matn ranglarini yangilash
+                navLinks.forEach((link) => {
+                    if (link === activeLink) {
+                        link.classList.remove('text-neutral-600', 'hover:text-black');
+                        link.classList.add('text-white');
+                    } else {
+                        link.classList.remove('text-white');
+                        link.classList.add('text-neutral-600', 'hover:text-black');
+                    }
+                });
+            }
+
+            // Boshlang'ich holatda 1-linkni aktiv qilish
+            if (navLinks.length > 0) {
+                setActiveLink(navLinks[0]);
+            }
+
+            // Oyna o'lchami o'zgarganda pill joylashuvini qayta hisoblash
+            window.addEventListener('resize', () => {
+                const currentActive = document.querySelector('.nav-link.text-white');
+                if (currentActive) setActiveLink(currentActive);
+            });
+
+            // Link bosilganda silliq o'tish va pill animatsiyasi
+            navLinks.forEach((link) => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        const targetSection = document.querySelector(href);
+                        if (targetSection) {
+                            e.preventDefault();
+                            isManualClick = true;
+                            clearTimeout(clickTimeout);
+
+                            setActiveLink(link);
+                            targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                            clickTimeout = setTimeout(() => {
+                                isManualClick = false;
+                            }, 800);
+                        }
+                    }
+                });
+            });
+
+            // Sahifa scroll bo'lganda qaysi bo'limda turganini avtomatik aniqlash (ScrollSpy)
+            const sections = Array.from(navLinks)
+                .map((link) => document.getElementById(link.dataset.target))
+                .filter(Boolean);
+
+            window.addEventListener('scroll', () => {
+                if (isManualClick) return;
+
+                const scrollPosition = window.scrollY + 180;
+                let currentSectionId = sections[0]?.id;
+
+                sections.forEach((section) => {
+                    if (scrollPosition >= section.offsetTop) {
+                        currentSectionId = section.id;
+                    }
+                });
+
+                // Agar sahifa eng pastiga yetgan bo'lsa "Aloqa" aktiv bo'ladi
+                if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 40) {
+                    currentSectionId = sections[sections.length - 1]?.id;
+                }
+
+                const matchingLink = document.querySelector(`.nav-link[data-target="${currentSectionId}"]`);
+                if (matchingLink) {
+                    setActiveLink(matchingLink);
+                }
+            }, { passive: true });
+
+
+            /* --- 2. HERO CAROUSEL --- */
+            const track = document.getElementById('carousel-track');
+            const dots = document.querySelectorAll('.carousel-dot');
+            const prevBtn = document.getElementById('prev-slide');
+            const nextBtn = document.getElementById('next-slide');
+            const carousel = document.getElementById('hero-carousel');
+            const totalSlides = dots.length;
+            let currentIndex = 0;
+            let autoPlayTimer;
+
+            function updateCarousel(index) {
+                currentIndex = (index + totalSlides) % totalSlides;
+                track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+                dots.forEach((dot, i) => {
+                    if (i === currentIndex) {
+                        dot.classList.remove('w-2', 'bg-white/45');
+                        dot.classList.add('w-6', 'bg-white');
+                    } else {
+                        dot.classList.remove('w-6', 'bg-white');
+                        dot.classList.add('w-2', 'bg-white/45');
+                    }
+                });
+            }
+
+            function startAutoPlay() {
+                autoPlayTimer = setInterval(() => {
+                    updateCarousel(currentIndex + 1);
+                }, 4500);
+            }
+
+            function resetAutoPlay() {
+                clearInterval(autoPlayTimer);
+                startAutoPlay();
+            }
+
+            prevBtn.addEventListener('click', () => {
+                updateCarousel(currentIndex - 1);
+                resetAutoPlay();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                updateCarousel(currentIndex + 1);
+                resetAutoPlay();
+            });
+
+            dots.forEach((dot) => {
+                dot.addEventListener('click', () => {
+                    updateCarousel(Number(dot.dataset.slide));
+                    resetAutoPlay();
+                });
+            });
+
+            carousel.addEventListener('mouseenter', () => clearInterval(autoPlayTimer));
+            carousel.addEventListener('mouseleave', startAutoPlay);
+
+            startAutoPlay();
+        });
+    </script>
+
+</body>
+</html>
