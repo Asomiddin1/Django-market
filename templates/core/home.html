@@ -382,7 +382,7 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-
+                 {% for product in products %}
                 <!-- Product 1 -->
                 <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
                     <div>
@@ -393,93 +393,21 @@
                             </span>
                         </div>
                         <div class="mt-4 px-1">
-                            <h3 class="font-extrabold text-base text-[#111113]">Smartfon</h3>
-                            <p class="text-neutral-500 text-xs mt-1">Zamonaviy smartfon, 256GB</p>
+                            <h3 class="font-extrabold text-base text-[#111113]">{{ product.name }}</h3>
+                            <p class="text-neutral-500 text-xs mt-1">{{ product.description }}</p>
                         </div>
                     </div>
 
                     <div class="mt-5 px-1">
                         <div class="text-lg font-extrabold text-[#111113]">
-                            2 500 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
+                           {{product.price}}<span class="text-xs font-semibold text-neutral-500">$</span>
                         </div>
                         <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shish
+                            Savatga qo‘shishs
                         </button>
                     </div>
                 </article>
-
-                <!-- Product 2 -->
-                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
-                    <div>
-                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
-                            <span class="group-hover:scale-110 transition duration-300">🎧</span>
-                            <span class="absolute top-3 left-3 bg-[#F96248] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                                -24%
-                            </span>
-                        </div>
-                        <div class="mt-4 px-1">
-                            <h3 class="font-extrabold text-base text-[#111113]">Wireless Headphones</h3>
-                            <p class="text-neutral-500 text-xs mt-1">Simsiz quloqchin, Hi-Fi ovoz</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 px-1">
-                        <div class="flex items-baseline gap-2">
-                            <span class="text-lg font-extrabold text-[#111113]">450 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span></span>
-                            <span class="text-xs text-neutral-400 line-through">590 000</span>
-                        </div>
-                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shish
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Product 3 -->
-                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
-                    <div>
-                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
-                            <span class="group-hover:scale-110 transition duration-300">⌚</span>
-                        </div>
-                        <div class="mt-4 px-1">
-                            <h3 class="font-extrabold text-base text-[#111113]">Smart Watch</h3>
-                            <p class="text-neutral-500 text-xs mt-1">Aqlli soat, AMOLED ekran</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 px-1">
-                        <div class="text-lg font-extrabold text-[#111113]">
-                            650 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
-                        </div>
-                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shish
-                        </button>
-                    </div>
-                </article>
-
-                <!-- Product 4 -->
-                <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition group">
-                    <div>
-                        <div class="h-44 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
-                            <span class="group-hover:scale-110 transition duration-300">💻</span>
-                            <span class="absolute top-3 left-3 bg-[#8B5CF6] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                                Hit
-                            </span>
-                        </div>
-                        <div class="mt-4 px-1">
-                            <h3 class="font-extrabold text-base text-[#111113]">Laptop</h3>
-                            <p class="text-neutral-500 text-xs mt-1">Kuchli noutbuk, 16GB RAM</p>
-                        </div>
-                    </div>
-
-                    <div class="mt-5 px-1">
-                        <div class="text-lg font-extrabold text-[#111113]">
-                            7 500 000 <span class="text-xs font-semibold text-neutral-500">so‘m</span>
-                        </div>
-                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shish
-                        </button>
-                    </div>
-                </article>
+                 {% endfor %}
 
             </div>
         </section>
