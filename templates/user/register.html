@@ -1,0 +1,206 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ro‘yxatdan o‘tish | Django Market</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.03);
+        }
+        /* Django {{ field }} input maydonlarini avtomatik stillash */
+        .django-field input,
+        .django-field select {
+            width: 100%;
+            background-color: #F4F4F6;
+            border: 1.5px solid transparent;
+            border-radius: 1rem;
+            padding: 0.8rem 1rem;
+            font-size: 0.875rem;
+            color: #111113;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .django-field input:focus,
+        .django-field select:focus {
+            background-color: #FFFFFF;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+        }
+        /* Django UserCreationForm default help_text ul/li ro'yxatlarini ixcham qilish */
+        .help-text ul {
+            list-style: disc;
+            padding-left: 1.1rem;
+            margin-top: 0.25rem;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-[#8B5CF6] selection:text-white">
+
+    <!-- Minimal Header -->
+    <header class="w-full py-5">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
+            <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group">
+                <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                    </svg>
+                </span>
+                <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                    Django Market
+                </span>
+            </a>
+
+            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition">
+                ← Bosh sahifaga
+            </a>
+        </div>
+    </header>
+
+    <!-- Asosiy Bento Konteyner -->
+    <main class="w-full max-w-5xl mx-auto px-4 sm:px-6 py-6 my-auto">
+        <div class="bento-card p-3 sm:p-4 grid grid-cols-1 lg:grid-cols-12 gap-4 items-stretch">
+
+            <!-- Chap ustun: Binafsha Bento Promo Karta (5 ustun) -->
+            <div class="lg:col-span-5 rounded-[1.5rem] bg-[#8B5CF6] text-white p-7 sm:p-9 flex flex-col justify-between relative overflow-hidden">
+                <div class="relative z-10">
+                    <span class="inline-block bg-white/15 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full">
+                        Django Market ID
+                    </span>
+
+                    <h2 class="mt-5 text-2xl sm:text-3xl font-extrabold tracking-tight leading-[1.15]">
+                        Qulay xaridlar olamiga qo‘shiling
+                    </h2>
+
+                    <p class="mt-3 text-xs sm:text-sm text-purple-100 leading-relaxed">
+                        Shaxsiy kabinet yarating va buyurtmalaringizni kuzatish, sevimli mahsulotlarni saqlash hamda maxsus chegirmalardan foydalanish imkoniyatiga ega bo‘ling.
+                    </p>
+                </div>
+
+                <!-- Afzalliklar mini-kartochkalari -->
+                <div class="relative z-10 mt-8 space-y-2.5">
+                    <div class="bg-white/12 backdrop-blur-xs rounded-2xl p-3.5 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-xl bg-white text-[#8B5CF6] flex items-center justify-center text-sm font-bold shrink-0">⚡</span>
+                        <div class="text-xs">
+                            <p class="font-bold text-white">Tezkor buyurtma</p>
+                            <p class="text-purple-100/80 text-[11px]">Bir klikda rasmiylashtirish</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white/12 backdrop-blur-xs rounded-2xl p-3.5 flex items-center gap-3">
+                        <span class="w-8 h-8 rounded-xl bg-[#F96248] text-white flex items-center justify-center text-sm font-bold shrink-0">%</span>
+                        <div class="text-xs">
+                            <p class="font-bold text-white">Bonus va chegirmalar</p>
+                            <p class="text-purple-100/80 text-[11px]">Doimiy mijozlar uchun keshbek</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- O'ng ustun: Ro'yxatdan o'tish formasi (7 ustun) -->
+            <div class="lg:col-span-7 p-5 sm:p-8 flex flex-col justify-center">
+                
+                <div class="mb-6">
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111113]">
+                        Akkaunt yaratish
+                    </h1>
+                    <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+                        Ro‘yxatdan o‘tish uchun quyidagi ma’lumotlarni kiriting.
+                    </p>
+                </div>
+
+                <!-- Django Messages -->
+                {% if messages %}
+                    <div class="space-y-2.5 mb-5">
+                        {% for message in messages %}
+                            <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold p-3.5 rounded-2xl">
+                                <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">✓</span>
+                                <span>{{ message }}</span>
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Umumiy forma xatoliklari -->
+                {% if form.non_field_errors %}
+                    <div class="bg-red-50 border border-red-200 text-[#F96248] text-xs font-semibold p-3.5 rounded-2xl mb-5">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <form method="POST" class="space-y-4">
+                    {% csrf_token %}
+
+                    {% for field in form %}
+                        <div class="django-field">
+                            <label for="{{ field.id_for_label }}" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                {{ field.label }}
+                            </label>
+
+                            {{ field }}
+
+                            {% if field.help_text %}
+                                <div class="help-text text-[11px] text-neutral-400 mt-1 leading-relaxed">
+                                    {{ field.help_text|safe }}
+                                </div>
+                            {% endif %}
+
+                            {% for error in field.errors %}
+                                <p class="text-[#F96248] text-xs font-semibold mt-1.5 flex items-center gap-1">
+                                    <span>•</span>
+                                    <span>{{ error }}</span>
+                                </p>
+                            {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    <div class="pt-2">
+                        <button
+                            type="submit"
+                            class="w-full bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs sm:text-sm font-bold py-3.5 px-6 rounded-full shadow-sm transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2"
+                        >
+                            <span>Ro‘yxatdan o‘tish</span>
+                            <span>→</span>
+                        </button>
+                    </div>
+
+                </form>
+
+                <!-- Kirish sahifasiga havola -->
+                <p class="mt-6 text-center text-xs text-neutral-500">
+                    Allaqachon akkauntingiz bormi?
+                    <a href="{% url 'users:login' %}" class="font-bold text-[#8B5CF6] hover:underline ml-1">
+                        Tizimga kirish
+                    </a>
+                </p>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Minimal Footer -->
+    <footer class="py-5 text-center text-[11px] text-neutral-400">
+        © 2026 Django Market. Barcha huquqlar himoyalangan.
+    </footer>
+
+</body>
+</html>
