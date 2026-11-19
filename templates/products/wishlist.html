@@ -1,0 +1,201 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening sevimlilarim — Django Market</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#8B5CF6] selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#F4F4F6]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4 lg:gap-6">
+                <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
+                    <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                        Django Market
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center bg-white p-1.5 rounded-full border border-black/5 shadow-xs text-xs font-semibold">
+                    <a href="{% url 'core:home' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Bosh sahifa
+                    </a>
+                    <a href="{% url 'categories:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Kategoriyalar
+                    </a>
+                    <a href="{% url 'products:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Mahsulotlar
+                    </a>
+                    <a href="{% url 'products:wishlist' %}" class="px-4 py-2 rounded-full bg-[#111113] text-white transition flex items-center gap-1.5">
+                        <span>Sevimlilar</span>
+                        <span class="text-rose-500">❤️</span>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- O'ng: Profil va Bosh sahifa -->
+            <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
+                <a href="{% url 'products:list' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                    ← Barcha mahsulotlar
+                </a>
+                <a href="{% url 'users:logout' %}" class="bg-white hover:bg-red-50 hover:text-red-600 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                    Chiqish
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 w-full flex-1">
+
+        <!-- Django Messages -->
+        {% if messages %}
+            <div class="space-y-2 mb-6">
+                {% for message in messages %}
+                    <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold p-3.5 rounded-2xl">
+                        <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">✓</span>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Sarlavha bloki -->
+        <div class="bento-card p-6 sm:p-8 mb-8 bg-gradient-to-r from-rose-50 via-white to-purple-50 border border-rose-100">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div>
+                    <span class="inline-flex items-center gap-1.5 bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">
+                        <span>❤️</span>
+                        <span>Many-to-Many Wishlist</span>
+                    </span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold text-[#111113] mt-2">
+                        Mening sevimlilarim
+                    </h1>
+                    <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+                        Siz yoqtirgan va keyinroq xarid qilish uchun saqlab qo‘ygan mahsulotlar.
+                    </p>
+                </div>
+                <div class="text-left sm:text-right">
+                    <span class="text-2xl sm:text-3xl font-extrabold text-[#111113]">{{ product_count }}</span>
+                    <p class="text-xs text-neutral-500 font-medium">ta saqlangan mahsulot</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mahsulotlar to'ri -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {% for product in products %}
+            <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group relative">
+                <div>
+                    <a href="{% url 'products:detail' product.id %}" class="block h-48 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
+                        {% else %}
+                            <span class="group-hover:scale-110 transition duration-300">📱</span>
+                        {% endif %}
+
+                        <span class="absolute top-3 left-3 bg-[#111113] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
+                            {{ product.category.name }}
+                        </span>
+
+                        <!-- Sevimlilardan o'chirish yurakchasi -->
+                        <span
+                           onclick="event.preventDefault(); window.location.href='{% url 'products:toggle_wishlist' product.id %}';"
+                           class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white text-rose-500 flex items-center justify-center shadow-md transition hover:scale-110 z-10 cursor-pointer"
+                           title="Sevimlilardan o‘chirish">
+                            <span>❤️</span>
+                        </span>
+                    </a>
+
+                    <div class="mt-4 px-1">
+                        <h2 class="font-extrabold text-base text-[#111113] group-hover:text-[#8B5CF6] transition-colors">
+                            <a href="{% url 'products:detail' product.id %}">
+                                {{ product.name }}
+                            </a>
+                        </h2>
+                        <p class="text-neutral-500 text-xs mt-1 line-clamp-2">
+                            {{ product.description }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-5 px-1">
+                    <div class="flex items-center justify-between">
+                        <div class="text-lg font-extrabold text-[#111113]">
+                            {{ product.price }} <span class="text-xs font-semibold text-neutral-500">$</span>
+                        </div>
+                        <span class="text-[11px] text-neutral-400 font-medium">
+                            {% if product.stock > 0 %}Mavjud: {{ product.stock }}{% else %}Tugagan{% endif %}
+                        </span>
+                    </div>
+
+                    <div class="flex items-center gap-2 mt-3">
+                        <button type="button" class="flex-1 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer shadow-xs">
+                            Savatga qo‘shish
+                        </button>
+                        <a href="{% url 'products:toggle_wishlist' product.id %}" class="bg-rose-50 hover:bg-rose-100 text-rose-600 p-3 rounded-full transition text-xs font-bold" title="O‘chirish">
+                            🗑️
+                        </a>
+                    </div>
+                </div>
+            </article>
+            {% empty %}
+            <div class="col-span-full bento-card p-12 text-center">
+                <span class="text-6xl">💔</span>
+                <h3 class="text-lg font-bold mt-4 text-[#111113]">Sevimlilar ro‘yxatingiz bo‘sh</h3>
+                <p class="text-xs text-neutral-500 mt-1 max-w-sm mx-auto">
+                    Mahsulotlar katalogini ko‘rib chiqing va o‘zingizga yoqqan mahsulotlarga ❤️ belgisini bosing.
+                </p>
+                <a href="{% url 'products:list' %}" class="inline-block mt-5 bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs font-bold px-6 py-3 rounded-full transition">
+                    Mahsulotlarni ko‘rish →
+                </a>
+            </div>
+            {% endfor %}
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0B0B0D] text-white pt-10 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+            <div class="flex items-center gap-2">
+                <span class="font-extrabold text-white text-sm">Django Market</span>
+                <span>— Zamonaviy Onlayn Do‘kon</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="{% url 'core:home' %}" class="hover:text-white transition">Bosh sahifa</a>
+                <a href="{% url 'categories:list' %}" class="hover:text-white transition">Kategoriyalar</a>
+                <a href="{% url 'products:list' %}" class="hover:text-white transition">Mahsulotlar</a>
+                <a href="{% url 'products:wishlist' %}" class="text-rose-400 font-semibold">Sevimlilar</a>
+            </div>
+            <p>© 2026 Django Market.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

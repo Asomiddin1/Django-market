@@ -55,20 +55,48 @@
                 </nav>
             </div>
 
-            <!-- O'ng: Savat va Bosh sahifa -->
+            <!-- O'ng: Savat, Sevimlilar va Bosh sahifa -->
             <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
                 <a href="#" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
                     <span>Savat</span>
                     <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">2</span>
                 </a>
-                <a href="{% url 'core:home' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
-                    Bosh sahifa
+                <a href="{% url 'products:wishlist' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Mening sevimlilarim">
+                    <span>Sevimlilar</span>
+                    <span class="text-rose-500">❤️</span>
                 </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'users:profile' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Profilim">
+                        <span>👤</span>
+                        <span class="text-xs font-semibold hidden sm:inline">
+                            {{ user.first_name|default:user.username }}
+                        </span>
+                    </a>
+                    <a href="{% url 'users:logout' %}" class="bg-white hover:bg-red-50 hover:text-red-600 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                        Chiqish
+                    </a>
+                {% else %}
+                    <a href="{% url 'users:login' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                        Kirish
+                    </a>
+                {% endif %}
             </div>
         </div>
     </header>
 
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 w-full flex-1">
+
+        <!-- Django Messages -->
+        {% if messages %}
+            <div class="space-y-2 mb-6">
+                {% for message in messages %}
+                    <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold p-3.5 rounded-2xl">
+                        <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">✓</span>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
 
         <!-- Breadcrumb & Top Bar -->
         <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
@@ -122,7 +150,7 @@
             {% for product in products %}
             <article class="bento-card p-4 flex flex-col justify-between hover:shadow-lg transition-all duration-300 group">
                 <div>
-                    <div class="h-48 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
+                    <a href="{% url 'products:detail' product.id %}" class="block h-48 rounded-2xl bg-[#F4F4F6] flex items-center justify-center text-6xl relative overflow-hidden">
                         {% if product.image %}
                             <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                         {% else %}
@@ -131,11 +159,25 @@
                         <span class="absolute top-3 left-3 bg-[#111113] text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
                             {{ product.category.name }}
                         </span>
-                    </div>
+
+                        <!-- Sevimlilar (Wishlist) tugmasi -->
+                        <span
+                           onclick="event.preventDefault(); window.location.href='{% url 'products:toggle_wishlist' product.id %}';"
+                           class="absolute top-3 right-3 w-8 h-8 rounded-full bg-white/90 hover:bg-white flex items-center justify-center shadow-md transition hover:scale-110 z-10 cursor-pointer"
+                           title="Sevimlilarga qo‘shish / o‘chirish">
+                            {% if product.id in user_favorite_ids %}
+                                <span class="text-rose-500 text-sm">❤️</span>
+                            {% else %}
+                                <span class="text-neutral-400 hover:text-rose-500 text-sm">🤍</span>
+                            {% endif %}
+                        </span>
+                    </a>
 
                     <div class="mt-4 px-1">
                         <h2 class="font-extrabold text-base text-[#111113] group-hover:text-[#8B5CF6] transition-colors">
-                            {{ product.name }}
+                            <a href="{% url 'products:detail' product.id %}">
+                                {{ product.name }}
+                            </a>
                         </h2>
                         <p class="text-neutral-500 text-xs mt-1 line-clamp-2">
                             {{ product.description }}
@@ -148,9 +190,11 @@
                         <div class="text-lg font-extrabold text-[#111113]">
                             {{ product.price }} <span class="text-xs font-semibold text-neutral-500">$</span>
                         </div>
-                        <span class="text-[11px] text-neutral-400 font-medium">
-                            {% if product.stock > 0 %}Mavjud: {{ product.stock }}{% else %}Tugagan{% endif %}
-                        </span>
+                        <div class="flex items-center gap-2 text-[11px] text-neutral-400 font-medium">
+                            <span title="Sevimlilar soni">❤️ {{ product.favorites.count }}</span>
+                            <span>•</span>
+                            <span>{% if product.stock > 0 %}Mavjud: {{ product.stock }}{% else %}Tugagan{% endif %}</span>
+                        </div>
                     </div>
                     <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer shadow-xs">
                         Savatga qo‘shish

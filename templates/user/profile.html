@@ -1,0 +1,399 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mening profilim — Django Market</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 2rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.02);
+        }
+        .form-input {
+            width: 100%;
+            background-color: #F4F4F6;
+            border: 1.5px solid transparent;
+            border-radius: 1rem;
+            padding: 0.85rem 1.1rem;
+            font-size: 0.875rem;
+            color: #111113;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+        .form-input:focus {
+            background-color: #FFFFFF;
+            border-color: #8B5CF6;
+            box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.12);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#8B5CF6] selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#F4F4F6]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4 lg:gap-6">
+                <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
+                    <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
+                        </svg>
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                        Django Market
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center bg-white p-1.5 rounded-full border border-black/5 shadow-xs text-xs font-semibold">
+                    <a href="{% url 'core:home' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Bosh sahifa
+                    </a>
+                    <a href="{% url 'categories:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Kategoriyalar
+                    </a>
+                    <a href="{% url 'products:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Mahsulotlar
+                    </a>
+                    <a href="{% url 'products:wishlist' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition flex items-center gap-1.5">
+                        <span>Sevimlilar</span>
+                        <span class="text-rose-500">❤️</span>
+                    </a>
+                    <a href="{% url 'users:profile' %}" class="px-4 py-2 rounded-full bg-[#111113] text-white transition">
+                        Profilim
+                    </a>
+                </nav>
+            </div>
+
+            <!-- O'ng: Profil va Chiqish -->
+            <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
+                <a href="{% url 'products:wishlist' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Mening sevimlilarim">
+                    <span>Sevimlilar</span>
+                    <span class="text-rose-500">❤️</span>
+                </a>
+                <a href="{% url 'users:logout' %}" class="bg-white hover:bg-red-50 hover:text-red-600 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
+                    Chiqish
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-6 pb-20 w-full flex-1">
+
+        <!-- Django Messages -->
+        {% if messages %}
+            <div class="space-y-2 mb-6">
+                {% for message in messages %}
+                    <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold p-3.5 rounded-2xl">
+                        <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">✓</span>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-xs text-neutral-400 mb-6 font-medium">
+            <a href="{% url 'core:home' %}" class="hover:text-black transition">Bosh sahifa</a>
+            <span>/</span>
+            <span class="text-neutral-800 font-semibold">Foydalanuvchi profili</span>
+        </nav>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+            <!-- Chap ustun: Foydalanuvchi ma'lumotlari kartasi (5 ustun) -->
+            <div class="lg:col-span-5 space-y-6">
+                
+                <!-- Asosiy Profil Karta -->
+                <div class="bento-card p-6 sm:p-8 text-center relative overflow-hidden">
+                    <div class="w-full h-24 bg-gradient-to-r from-[#8B5CF6] to-[#6366F1] absolute top-0 left-0"></div>
+
+                    <!-- Avatar -->
+                    <div class="relative pt-6 flex justify-center">
+                        <div class="w-28 h-28 rounded-full border-4 border-white bg-[#F4F4F6] shadow-md overflow-hidden flex items-center justify-center text-5xl">
+                            {% if profile.avatar %}
+                                <img src="{{ profile.avatar.url }}" alt="{{ user.username }}" class="w-full h-full object-cover">
+                            {% else %}
+                                <span class="text-neutral-400">👤</span>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Ism va Username -->
+                    <div class="mt-4">
+                        <h2 class="text-xl sm:text-2xl font-extrabold text-[#111113]">
+                            {{ user.get_full_name|default:user.username }}
+                        </h2>
+                        <span class="inline-block bg-[#8B5CF6]/10 text-[#8B5CF6] text-xs font-bold px-3 py-1 rounded-full mt-1.5">
+                            @{{ user.username }}
+                        </span>
+                    </div>
+
+                    <!-- Bio -->
+                    {% if profile.bio %}
+                        <p class="text-xs text-neutral-500 mt-4 italic bg-[#F4F4F6] p-3 rounded-2xl">
+                            "{{ profile.bio }}"
+                        </p>
+                    {% endif %}
+
+                    <!-- Tafsilotlar ro'yxati -->
+                    <div class="mt-6 space-y-3 text-left border-t border-black/5 pt-5 text-xs">
+                        <div class="flex items-center gap-3 text-neutral-600">
+                            <span class="w-8 h-8 rounded-xl bg-[#F4F4F6] flex items-center justify-center text-sm shrink-0">✉️</span>
+                            <div class="truncate">
+                                <p class="text-[10px] text-neutral-400 font-bold uppercase">Email</p>
+                                <p class="font-semibold text-[#111113] truncate">{{ user.email|default:"Kiritilmagan" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-neutral-600">
+                            <span class="w-8 h-8 rounded-xl bg-[#F4F4F6] flex items-center justify-center text-sm shrink-0">📞</span>
+                            <div>
+                                <p class="text-[10px] text-neutral-400 font-bold uppercase">Telefon</p>
+                                <p class="font-semibold text-[#111113]">{{ profile.phone_number|default:"Kiritilmagan" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-neutral-600">
+                            <span class="w-8 h-8 rounded-xl bg-[#F4F4F6] flex items-center justify-center text-sm shrink-0">📍</span>
+                            <div>
+                                <p class="text-[10px] text-neutral-400 font-bold uppercase">Manzil</p>
+                                <p class="font-semibold text-[#111113]">{{ profile.address|default:"Kiritilmagan" }}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-center gap-3 text-neutral-600">
+                            <span class="w-8 h-8 rounded-xl bg-[#F4F4F6] flex items-center justify-center text-sm shrink-0">📅</span>
+                            <div>
+                                <p class="text-[10px] text-neutral-400 font-bold uppercase">A’zo bo‘lgan sana</p>
+                                <p class="font-semibold text-[#111113]">{{ user.date_joined|date:"d-F, Y" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mini Statistika kartochkalari -->
+                <div class="grid grid-cols-2 gap-4">
+                    <a href="{% url 'products:wishlist' %}" class="bento-card p-4 hover:-translate-y-0.5 transition flex flex-col justify-between group">
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl">❤️</span>
+                            <span class="text-xs text-[#8B5CF6] font-bold group-hover:underline">Ko‘rish →</span>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-2xl font-extrabold text-[#111113]">{{ favorites_count }}</span>
+                            <p class="text-[11px] text-neutral-400 font-medium">Sevimli mahsulot</p>
+                        </div>
+                    </a>
+
+                    <div class="bento-card p-4 flex flex-col justify-between">
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl">🔗</span>
+                            <span class="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-2 py-0.5 rounded-full border border-emerald-200">1-to-1</span>
+                        </div>
+                        <div class="mt-3">
+                            <span class="text-sm font-extrabold text-[#111113]">OneToOneField</span>
+                            <p class="text-[11px] text-neutral-400 font-medium">User ↔ Profile</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- O'ng ustun: Profilni tahrirlash formasi (7 ustun) -->
+            <div class="lg:col-span-7">
+                <div class="bento-card p-6 sm:p-10">
+                    
+                    <div class="mb-6">
+                        <h1 class="text-2xl sm:text-3xl font-extrabold text-[#111113] tracking-tight">
+                            Profilni tahrirlash
+                        </h1>
+                        <p class="text-xs sm:text-sm text-neutral-500 mt-1">
+                            Shaxsiy va yetkazib berish ma’lumotlaringizni yangilang.
+                        </p>
+                    </div>
+
+                    <!-- Umumiy forma xatoliklari -->
+                    {% if u_form.errors or p_form.errors %}
+                        <div class="bg-red-50 border border-red-200 text-[#F96248] text-xs font-semibold p-4 rounded-2xl mb-6 space-y-1">
+                            {% for field, errors in u_form.errors.items %}
+                                {% for error in errors %}<p>• {{ error }}</p>{% endfor %}
+                            {% endfor %}
+                            {% for field, errors in p_form.errors.items %}
+                                {% for error in errors %}<p>• {{ error }}</p>{% endfor %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
+                    <form method="POST" enctype="multipart/form-data" class="space-y-5">
+                        {% csrf_token %}
+
+                        <!-- Profil rasmi (Avatar) yuklash -->
+                        <div>
+                            <label class="block text-xs font-bold text-[#111113] mb-2">
+                                Profil rasmi (Avatar)
+                            </label>
+                            <div class="flex items-center gap-4">
+                                <div class="w-16 h-16 rounded-full bg-[#F4F4F6] border border-black/5 overflow-hidden flex items-center justify-center text-2xl shrink-0">
+                                    {% if profile.avatar %}
+                                        <img src="{{ profile.avatar.url }}" alt="Preview" class="w-full h-full object-cover">
+                                    {% else %}
+                                        <span>👤</span>
+                                    {% endif %}
+                                </div>
+                                <div class="flex-1">
+                                    <input
+                                        type="file"
+                                        name="avatar"
+                                        id="id_avatar"
+                                        accept="image/*"
+                                        class="block w-full text-xs text-neutral-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-full file:border-0 file:text-xs file:font-bold file:bg-[#111113] file:text-white hover:file:bg-[#8B5CF6] file:transition file:cursor-pointer"
+                                    />
+                                    <p class="text-[11px] text-neutral-400 mt-1">PNG, JPG yoki WEBP (maks. 5MB)</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ism va Familiya (2 ustun) -->
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="id_first_name" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                    Ism
+                                </label>
+                                <input
+                                    id="id_first_name"
+                                    type="text"
+                                    name="first_name"
+                                    value="{{ u_form.first_name.value|default:'' }}"
+                                    placeholder="Ismingizni kiriting"
+                                    class="form-input"
+                                />
+                            </div>
+
+                            <div>
+                                <label for="id_last_name" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                    Familiya
+                                </label>
+                                <input
+                                    id="id_last_name"
+                                    type="text"
+                                    name="last_name"
+                                    value="{{ u_form.last_name.value|default:'' }}"
+                                    placeholder="Familiyangizni kiriting"
+                                    class="form-input"
+                                />
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div>
+                            <label for="id_email" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                Elektron pochta (Email) <span class="text-rose-500">*</span>
+                            </label>
+                            <input
+                                id="id_email"
+                                type="email"
+                                name="email"
+                                value="{{ u_form.email.value|default:'' }}"
+                                required
+                                placeholder="example@gmail.com"
+                                class="form-input"
+                            />
+                        </div>
+
+                        <!-- Telefon raqam -->
+                        <div>
+                            <label for="id_phone_number" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                Telefon raqam
+                            </label>
+                            <input
+                                id="id_phone_number"
+                                type="text"
+                                name="phone_number"
+                                value="{{ p_form.phone_number.value|default:'' }}"
+                                placeholder="+998 90 123 45 67"
+                                class="form-input"
+                            />
+                        </div>
+
+                        <!-- Yetkazib berish manzili -->
+                        <div>
+                            <label for="id_address" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                Yetkazib berish manzili
+                            </label>
+                            <input
+                                id="id_address"
+                                type="text"
+                                name="address"
+                                value="{{ p_form.address.value|default:'' }}"
+                                placeholder="Toshkent sh., Yunusobod tumani, 12-uy"
+                                class="form-input"
+                            />
+                        </div>
+
+                        <!-- Bio (O'zi haqida) -->
+                        <div>
+                            <label for="id_bio" class="block text-xs font-bold text-[#111113] mb-1.5">
+                                O‘zingiz haqingizda (Bio)
+                            </label>
+                            <textarea
+                                id="id_bio"
+                                name="bio"
+                                rows="3"
+                                placeholder="O‘zingiz haqingizda qisqacha ma’lumot..."
+                                class="form-input"
+                            >{{ p_form.bio.value|default:'' }}</textarea>
+                        </div>
+
+                        <!-- Saqlash tugmasi -->
+                        <div class="pt-3">
+                            <button
+                                type="submit"
+                                class="w-full sm:w-auto bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs sm:text-sm font-bold py-3.5 px-8 rounded-full shadow-sm transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
+                            >
+                                <span>O‘zgarishlarni saqlash</span>
+                                <span>✓</span>
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#0B0B0D] text-white pt-10 pb-8 mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-neutral-400">
+            <div class="flex items-center gap-2">
+                <span class="font-extrabold text-white text-sm">Django Market</span>
+                <span>— Zamonaviy Onlayn Do‘kon</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="{% url 'core:home' %}" class="hover:text-white transition">Bosh sahifa</a>
+                <a href="{% url 'categories:list' %}" class="hover:text-white transition">Kategoriyalar</a>
+                <a href="{% url 'products:list' %}" class="hover:text-white transition">Mahsulotlar</a>
+                <a href="{% url 'products:wishlist' %}" class="hover:text-white transition">Sevimlilar</a>
+                <a href="{% url 'users:profile' %}" class="text-white font-semibold">Profil</a>
+            </div>
+            <p>© 2026 Django Market.</p>
+        </div>
+    </footer>
+
+</body>
+</html>

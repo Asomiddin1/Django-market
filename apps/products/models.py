@@ -1,6 +1,5 @@
 from django.db import models
-
-from django.db import models
+from django.contrib.auth.models import User
 from apps.categories.models import Category
 
 
@@ -17,7 +16,19 @@ class Product(models.Model):
     stock = models.PositiveIntegerField(default=0)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
 
+    # Many-to-Many 
+    favorites = models.ManyToManyField(
+        User,
+        related_name='favorite_products',
+        blank=True,
+        verbose_name="Sevimlilar (Foydalanuvchilar)"
+    )
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.name
+
+    @property
+    def favorites_count(self):
+        return self.favorites.count()
