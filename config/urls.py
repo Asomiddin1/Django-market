@@ -19,12 +19,15 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 
+from apps.products.api_views import product_list_api
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.core.urls')),
     path('users/', include('apps.users.urls')),
     path('categories/', include('apps.categories.urls')),
     path('products/', include('apps.products.urls')),
+    path('api/products/', product_list_api, name='api_products_list'),
 ]
 
 if settings.DEBUG:
