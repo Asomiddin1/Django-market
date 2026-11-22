@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from .models import Product
+from .forms import ProductForm
 from apps.categories.models import Category
 
 
@@ -97,3 +98,65 @@ def wishlist_view(request):
         'product_count': favorite_products.count(),
     }
     return render(request, 'products/wishlist.html', context)
+
+
+@login_required(login_url='users:login')
+def product_create_view(request):
+    """
+    Yangi mahsulot qo'shish sahifasi (Create).
+    """
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save()
+            messages.success(request, f"«{product.name}» muvaffaqiyatli qo‘shildi!")
+            return redirect('products:detail', pk=product.pk)
+    else:
+        form = ProductForm()
+
+    return render(request, 'products/product_form.html', {
+        'form': form,
+        'title': "Yangi mahsulot qo‘shish",
+        'btn_text': "Mahsulotni saqlash",
+    })
+
+
+@login_required(login_url='users:login')
+def product_update_view(request, pk):
+    """
+    Mavjud mahsulotni tahrirlash sahifasi (Update).
+    """
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            product = form.save()
+            messages.success(request, f"«{product.name}» ma’lumotlari yangilandi!")
+            return redirect('products:detail', pk=product.pk)
+    else:
+        form = ProductForm(instance=product)
+
+    return render(request, 'products/product_form.html', {
+        'form': form,
+        'product': product,
+        'title': f"«{product.name}»ni tahrirlash",
+        'btn_text': "O‘zgarishlarni saqlash",
+        'is_edit': True,
+    })
+
+
+@login_required(login_url='users:login')
+def product_delete_view(request, pk):
+    """
+    Mahsulotni o'chirish (Delete).
+    """
+    product = get_object_or_404(Product, pk=pk)
+    if request.method == 'POST':
+        name = product.name
+        product.delete()
+        messages.warning(request, f"«{name}» mahsuloti o‘chirildi.")
+        return redirect('products:list')
+
+    return render(request, 'products/product_confirm_delete.html', {'product': product})
+

@@ -268,6 +268,19 @@
                             </a>
                         </div>
 
+                        {% if user.is_authenticated %}
+                        <div class="flex items-center gap-3 pt-3">
+                            <a href="{% url 'products:update' product.pk %}" class="flex-1 bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-bold py-2.5 px-4 rounded-full transition flex items-center justify-center gap-1.5 border border-amber-200">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                                <span>Mahsulotni tahrirlash</span>
+                            </a>
+                            <a href="{% url 'products:delete' product.pk %}" class="bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold py-2.5 px-4 rounded-full transition flex items-center justify-center gap-1.5 border border-rose-200">
+                                <i class="fa-solid fa-trash-can"></i>
+                                <span>O‘chirish</span>
+                            </a>
+                        </div>
+                        {% endif %}
+
                         <!-- Afzalliklar kartochkalari -->
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-4">
                             <div class="bg-[#F4F4F6] p-3 rounded-2xl flex items-center gap-2.5">

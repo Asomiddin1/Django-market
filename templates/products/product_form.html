@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} — Django Market</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #F4F4F6;
+            color: #111113;
+        }
+        .bento-card {
+            background-color: #FFFFFF;
+            border-radius: 1.75rem;
+            border: 1px solid rgba(0, 0, 0, 0.04);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.02);
+        }
+    </style>
+</head>
+
+<body class="antialiased selection:bg-[#8B5CF6] selection:text-white min-h-screen flex flex-col justify-between">
+
+    <!-- Header -->
+    <header class="sticky top-0 z-40 bg-[#F4F4F6]/85 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between gap-4">
+            
+            <div class="flex items-center gap-4 lg:gap-6">
+                <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
+                    <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
+                    </span>
+                    <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
+                        Django Market
+                    </span>
+                </a>
+
+                <nav class="hidden md:flex items-center bg-white p-1.5 rounded-full border border-black/5 shadow-xs text-xs font-semibold">
+                    <a href="{% url 'core:home' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Bosh sahifa
+                    </a>
+                    <a href="{% url 'categories:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Kategoriyalar
+                    </a>
+                    <a href="{% url 'products:list' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition">
+                        Mahsulotlar
+                    </a>
+                    <a href="{% url 'products:wishlist' %}" class="px-4 py-2 rounded-full text-neutral-600 hover:text-black transition flex items-center gap-1.5">
+                        <span>Sevimlilar</span>
+                        <i class="fa-regular fa-heart text-rose-500"></i>
+                    </a>
+                </nav>
+            </div>
+
+            <!-- O'ng: Savat va Katalog -->
+            <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
+                <a href="{% url 'cart:detail' %}" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Savat</span>
+                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">{{ cart|length }}</span>
+                </a>
+                <a href="{% url 'products:list' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-arrow-left text-[11px]"></i>
+                    <span>Bekor qilish</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 pb-20 w-full flex-1">
+
+        <!-- Form Kartasi -->
+        <div class="bento-card p-6 sm:p-10">
+            <div class="flex items-center justify-between border-b border-black/5 pb-6 mb-8">
+                <div>
+                    <span class="text-xs font-bold uppercase tracking-wider text-[#8B5CF6]">CRUD Boshqaruvi</span>
+                    <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight text-[#111113] mt-1">
+                        {{ title }}
+                    </h1>
+                </div>
+                <div class="w-12 h-12 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl shrink-0">
+                    <i class="fa-solid fa-box-open"></i>
+                </div>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data" class="space-y-6">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="bg-rose-50 border border-rose-200 text-rose-800 text-xs font-semibold p-4 rounded-2xl">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <!-- Mahsulot nomi -->
+                <div>
+                    <label class="block text-xs font-bold text-neutral-700 mb-2">
+                        {{ form.name.label }} <span class="text-rose-500">*</span>
+                    </label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <p class="text-rose-500 text-xs mt-1.5">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Kategoriya -->
+                <div>
+                    <label class="block text-xs font-bold text-neutral-700 mb-2">
+                        {{ form.category.label }} <span class="text-rose-500">*</span>
+                    </label>
+                    {{ form.category }}
+                    {% if form.category.errors %}
+                        <p class="text-rose-500 text-xs mt-1.5">{{ form.category.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Narx va Ombordagi soni (2 ustun) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-neutral-700 mb-2">
+                            {{ form.price.label }} <span class="text-rose-500">*</span>
+                        </label>
+                        {{ form.price }}
+                        {% if form.price.errors %}
+                            <p class="text-rose-500 text-xs mt-1.5">{{ form.price.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-neutral-700 mb-2">
+                            {{ form.stock.label }} <span class="text-rose-500">*</span>
+                        </label>
+                        {{ form.stock }}
+                        {% if form.stock.errors %}
+                            <p class="text-rose-500 text-xs mt-1.5">{{ form.stock.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Tavsif -->
+                <div>
+                    <label class="block text-xs font-bold text-neutral-700 mb-2">
+                        {{ form.description.label }} <span class="text-rose-500">*</span>
+                    </label>
+                    {{ form.description }}
+                    {% if form.description.errors %}
+                        <p class="text-rose-500 text-xs mt-1.5">{{ form.description.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Rasm yuklash -->
+                <div>
+                    <label class="block text-xs font-bold text-neutral-700 mb-2">
+                        {{ form.image.label }}
+                    </label>
+                    {% if is_edit and product.image %}
+                        <div class="flex items-center gap-3 mb-3 p-3 bg-neutral-50 rounded-2xl border border-black/5">
+                            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="w-12 h-12 object-cover rounded-xl">
+                            <span class="text-xs text-neutral-500">Mavjud rasm: {{ product.image.name }}</span>
+                        </div>
+                    {% endif %}
+                    <div class="p-4 bg-[#F4F4F6] rounded-2xl border border-dashed border-neutral-300">
+                        {{ form.image }}
+                    </div>
+                    {% if form.image.errors %}
+                        <p class="text-rose-500 text-xs mt-1.5">{{ form.image.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <!-- Saqlash tugmalari -->
+                <div class="flex items-center justify-end gap-3 pt-6 border-t border-black/5">
+                    <a href="{% if is_edit %}{% url 'products:detail' product.pk %}{% else %}{% url 'products:list' %}{% endif %}" class="px-6 py-3 rounded-full border border-black/10 text-[#111113] hover:bg-neutral-100 text-xs font-bold transition">
+                        Bekor qilish
+                    </a>
+                    <button type="submit" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white px-8 py-3 rounded-full text-xs font-bold shadow-sm hover:shadow-md transition-all duration-300 flex items-center gap-2 cursor-pointer">
+                        <i class="fa-solid fa-check"></i>
+                        <span>{{ btn_text }}</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-black/5 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-neutral-500">
+            © 2026 Django Market. Barcha huquqlar himoyalangan.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -125,19 +125,27 @@
                 </p>
             </div>
 
-            <!-- Qidiruv formasi -->
-            <form method="GET" action="{% url 'products:list' %}" class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-black/5 shadow-xs w-full sm:w-80">
-                {% if selected_category_id %}
-                    <input type="hidden" name="category" value="{{ selected_category_id }}">
+            <!-- Qo'shish tugmasi va Qidiruv formasi -->
+            <div class="flex flex-wrap items-center gap-3 w-full sm:w-auto">
+                {% if user.is_authenticated %}
+                <a href="{% url 'products:create' %}" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white px-4 py-2.5 rounded-full text-xs font-bold transition flex items-center gap-1.5 shadow-xs">
+                    <i class="fa-solid fa-plus text-[11px]"></i>
+                    <span>Mahsulot qo‘shish</span>
+                </a>
                 {% endif %}
-                <i class="fa-solid fa-magnifying-glass text-neutral-400 text-xs"></i>
-                <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Mahsulotlarni qidirish..." class="bg-transparent text-xs w-full focus:outline-none text-[#111113]">
-                {% if query %}
-                    <a href="{% url 'products:list' %}{% if selected_category_id %}?category={{ selected_category_id }}{% endif %}" class="text-xs text-neutral-400 hover:text-black">
-                        <i class="fa-solid fa-xmark"></i>
-                    </a>
-                {% endif %}
-            </form>
+                <form method="GET" action="{% url 'products:list' %}" class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-black/5 shadow-xs w-full sm:w-80">
+                    {% if selected_category_id %}
+                        <input type="hidden" name="category" value="{{ selected_category_id }}">
+                    {% endif %}
+                    <i class="fa-solid fa-magnifying-glass text-neutral-400 text-xs"></i>
+                    <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Mahsulotlarni qidirish..." class="bg-transparent text-xs w-full focus:outline-none text-[#111113]">
+                    {% if query %}
+                        <a href="{% url 'products:list' %}{% if selected_category_id %}?category={{ selected_category_id }}{% endif %}" class="text-xs text-neutral-400 hover:text-black">
+                            <i class="fa-solid fa-xmark"></i>
+                        </a>
+                    {% endif %}
+                </form>
+            </div>
         </div>
 
         <!-- Kategoriyalar bo'yicha filter tugmalari -->
