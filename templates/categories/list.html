@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -33,9 +34,7 @@
             <div class="flex items-center gap-4 lg:gap-6">
                 <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
                     <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                        </svg>
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
                     </span>
                     <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
                         Django Market
@@ -59,7 +58,7 @@
             <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
                 <a href="{% url 'products:list' %}" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
                     <span>Mahsulotlar</span>
-                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">→</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
                 <a href="{% url 'core:home' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
                     Bosh sahifa
@@ -88,10 +87,12 @@
 
             <!-- Qidiruv -->
             <form method="GET" action="{% url 'categories:list' %}" class="flex items-center gap-2 bg-white px-4 py-2.5 rounded-full border border-black/5 shadow-xs w-full sm:w-80">
-                <span>🔍</span>
+                <i class="fa-solid fa-magnifying-glass text-neutral-400 text-xs"></i>
                 <input type="text" name="q" value="{{ query|default:'' }}" placeholder="Kategoriyalarni qidirish..." class="bg-transparent text-xs w-full focus:outline-none text-[#111113]">
                 {% if query %}
-                    <a href="{% url 'categories:list' %}" class="text-xs text-neutral-400 hover:text-black">✕</a>
+                    <a href="{% url 'categories:list' %}" class="text-xs text-neutral-400 hover:text-black">
+                        <i class="fa-solid fa-xmark"></i>
+                    </a>
                 {% endif %}
             </form>
         </div>
@@ -101,14 +102,14 @@
             {% for category in categories %}
             <a href="{% url 'products:list' %}?category={{ category.id }}" class="bento-card p-6 flex flex-col justify-between hover:-translate-y-1.5 hover:shadow-lg transition-all duration-300 group">
                 <div>
-                    <div class="w-14 h-14 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-3xl group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
-                        {% if "apple" in category.name|lower or "telefon" in category.name|lower %}📱
-                        {% elif "mebel" in category.name|lower %}🛋️
-                        {% elif "kiyim" in category.name|lower %}👕
-                        {% elif "poyabzal" in category.name|lower %}👟
-                        {% elif "turizm" in category.name|lower or "baliq" in category.name|lower %}🏕️
-                        {% elif "texnika" in category.name|lower %}📺
-                        {% else %}📦{% endif %}
+                    <div class="w-14 h-14 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-2xl group-hover:bg-[#8B5CF6] group-hover:text-white transition-colors duration-300">
+                        {% if "apple" in category.name|lower or "telefon" in category.name|lower %}<i class="fa-solid fa-mobile-screen-button"></i>
+                        {% elif "mebel" in category.name|lower %}<i class="fa-solid fa-couch"></i>
+                        {% elif "kiyim" in category.name|lower %}<i class="fa-solid fa-shirt"></i>
+                        {% elif "poyabzal" in category.name|lower %}<i class="fa-solid fa-shoe-prints"></i>
+                        {% elif "turizm" in category.name|lower or "baliq" in category.name|lower %}<i class="fa-solid fa-campground"></i>
+                        {% elif "texnika" in category.name|lower %}<i class="fa-solid fa-tv"></i>
+                        {% else %}<i class="fa-solid fa-box-open"></i>{% endif %}
                     </div>
                     <div class="mt-5">
                         <h2 class="font-bold text-lg text-[#111113] group-hover:text-[#8B5CF6] transition-colors">
@@ -127,13 +128,14 @@
                         {{ category.products.count }} ta mahsulot
                     </span>
                     <span class="text-xs font-bold text-[#8B5CF6] flex items-center gap-1 group-hover:translate-x-1 transition-transform">
-                        Ko‘rish →
+                        <span>Ko‘rish</span>
+                        <i class="fa-solid fa-arrow-right text-[10px]"></i>
                     </span>
                 </div>
             </a>
             {% empty %}
             <div class="col-span-full bento-card p-12 text-center">
-                <span class="text-5xl">📂</span>
+                <i class="fa-solid fa-folder-open text-5xl text-neutral-300"></i>
                 <h3 class="text-lg font-bold mt-4 text-[#111113]">Kategoriyalar topilmadi</h3>
                 <p class="text-xs text-neutral-500 mt-1">Qidiruv so‘rovingizga mos toifa topilmadi.</p>
                 <a href="{% url 'categories:list' %}" class="inline-block mt-4 bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition">

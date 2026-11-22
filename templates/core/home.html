@@ -10,6 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -40,9 +41,7 @@
             <div class="flex items-center gap-4 lg:gap-6">
                 <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
                     <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                        </svg>
+                        <i class="fa-solid fa-bag-shopping text-sm"></i>
                     </span>
                     <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
                         Django Market
@@ -84,29 +83,33 @@
             <!-- O'ng: Savat va Kirish / Profil -->
             <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
                 <a href="#" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+                    <i class="fa-solid fa-cart-shopping"></i>
                     <span>Savat</span>
                     <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">2</span>
                 </a>
                 <a href="{% url 'products:wishlist' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Mening sevimlilarim">
                     <span>Sevimlilar</span>
-                    <span class="text-rose-500">❤️</span>
+                    <i class="fa-solid fa-heart text-rose-500"></i>
                 </a>
                 {% if user.is_authenticated %}
                     <a href="{% url 'users:profile' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Profilim">
-                        <span>👤</span>
+                        <i class="fa-solid fa-user text-neutral-500"></i>
                         <span class="text-xs font-semibold hidden sm:inline">
                             {{ user.first_name|default:user.username }}
                         </span>
                     </a>
-                    <a href="{% url 'users:logout' %}" class="bg-white hover:bg-red-50 hover:text-red-600 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
-                        Chiqish
+                    <a href="{% url 'users:logout' %}" class="bg-white hover:bg-red-50 hover:text-red-600 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                        <span>Chiqish</span>
                     </a>
                 {% else %}
-                    <a href="{% url 'users:login' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition">
-                        Kirish
+                    <a href="{% url 'users:login' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1">
+                        <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                        <span>Kirish</span>
                     </a>
-                    <a href="{% url 'users:register' %}" class="bg-[#111113] hover:bg-[#8B5CF6] text-white px-4 py-2.5 rounded-full transition hidden sm:inline-block">
-                        Ro‘yxatdan o‘tish
+                    <a href="{% url 'users:register' %}" class="bg-[#111113] hover:bg-[#8B5CF6] text-white px-4 py-2.5 rounded-full transition hidden sm:inline-flex items-center gap-1.5">
+                        <i class="fa-solid fa-user-plus"></i>
+                        <span>Ro‘yxatdan o‘tish</span>
                     </a>
                 {% endif %}
             </div>
@@ -120,7 +123,9 @@
             <div class="space-y-2 mb-4">
                 {% for message in messages %}
                     <div class="flex items-center gap-2.5 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold p-3.5 rounded-2xl">
-                        <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">✓</span>
+                        <span class="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-[10px] shrink-0">
+                            <i class="fa-solid fa-check"></i>
+                        </span>
                         <span>{{ message }}</span>
                     </div>
                 {% endfor %}
@@ -155,8 +160,9 @@
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="{% url 'products:list' %}" class="bg-white text-[#111113] hover:bg-neutral-100 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                                    Xarid qilish →
+                                <a href="{% url 'products:list' %}" class="bg-white text-[#111113] hover:bg-neutral-100 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-1.5">
+                                    <span>Xarid qilish</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                                 <a href="{% url 'categories:list' %}" class="bg-white/15 hover:bg-white/25 text-white border border-white/20 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
                                     Kategoriyalar
@@ -183,8 +189,9 @@
                                     <span class="bg-white/90 backdrop-blur-md text-[#111113] px-3 py-1 rounded-full shadow-sm">
                                         Wireless Studio Pro
                                     </span>
-                                    <span class="bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-full">
-                                        ★ 4.9
+                                    <span class="bg-black/60 backdrop-blur-md text-amber-300 px-2.5 py-1 rounded-full flex items-center gap-1">
+                                        <i class="fa-solid fa-star text-[10px]"></i>
+                                        <span>4.9</span>
                                     </span>
                                 </div>
                             </div>
@@ -199,7 +206,7 @@
 
                         <div class="lg:col-span-7 space-y-5 relative z-10">
                             <span class="inline-flex items-center gap-2 bg-white/15 backdrop-blur-md text-white text-xs font-bold px-4 py-1.5 rounded-full shadow-xs border border-white/20">
-                                <span>⚡</span>
+                                <i class="fa-solid fa-bolt text-amber-300"></i>
                                 <span>0% Boshlang‘ich to‘lov</span>
                             </span>
 
@@ -212,8 +219,9 @@
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white hover:bg-neutral-900 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg transition-all duration-300">
-                                    Modellarni ko‘rish →
+                                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white hover:bg-neutral-900 text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg transition-all duration-300 flex items-center gap-1.5">
+                                    <span>Modellarni ko‘rish</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                                 <a href="{% url 'categories:list' %}" class="bg-white/15 hover:bg-white/25 text-white border border-white/20 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
                                     Barcha toifalar
@@ -256,7 +264,7 @@
 
                         <div class="lg:col-span-7 space-y-5 relative z-10">
                             <span class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md text-neutral-200 text-xs font-bold px-4 py-1.5 rounded-full shadow-xs border border-white/10">
-                                <span>🚚</span>
+                                <i class="fa-solid fa-truck-fast"></i>
                                 <span>O‘zbekiston bo‘ylab tezkor yetkazish</span>
                             </span>
 
@@ -269,8 +277,9 @@
                             </p>
 
                             <div class="pt-2 flex flex-wrap items-center gap-3">
-                                <a href="{% url 'products:list' %}" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300">
-                                    Katalogni ochish →
+                                <a href="{% url 'products:list' %}" class="bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-extrabold px-6 py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-1.5">
+                                    <span>Katalogni ochish</span>
+                                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                                 </a>
                                 <a href="{% url 'categories:list' %}" class="bg-white/10 hover:bg-white/20 text-white border border-white/15 backdrop-blur-md text-xs font-bold px-6 py-3.5 rounded-full transition">
                                     Barcha toifalar
@@ -288,8 +297,9 @@
                                 <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none"></div>
 
                                 <!-- Floating Badge 1 -->
-                                <span class="absolute top-3.5 left-3.5 bg-emerald-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md">
-                                    ✓ 100% Original
+                                <span class="absolute top-3.5 left-3.5 bg-emerald-500 text-white text-[11px] font-extrabold px-3 py-1 rounded-full shadow-md flex items-center gap-1">
+                                    <i class="fa-solid fa-check text-[10px]"></i>
+                                    <span>100% Original</span>
                                 </span>
 
                                 <!-- Floating Badge 2 -->
@@ -317,14 +327,10 @@
 
                     <div class="flex items-center gap-2 pointer-events-auto">
                         <button type="button" id="prev-slide" aria-label="Oldingi slayd" class="w-10 h-10 rounded-full bg-black/30 hover:bg-white text-white hover:text-[#111113] border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
-                            </svg>
+                            <i class="fa-solid fa-chevron-left text-xs"></i>
                         </button>
                         <button type="button" id="next-slide" aria-label="Keyingi slayd" class="w-10 h-10 rounded-full bg-black/30 hover:bg-white text-white hover:text-[#111113] border border-white/15 backdrop-blur-md flex items-center justify-center transition-all duration-300 cursor-pointer shadow-md">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/>
-                            </svg>
+                            <i class="fa-solid fa-chevron-right text-xs"></i>
                         </button>
                     </div>
                 </div>
@@ -359,14 +365,16 @@
                     </div>
 
                     <div class="flex items-center gap-2 bg-[#F4F4F6] px-4 py-2 rounded-full text-xs text-neutral-500 w-full sm:w-72">
-                        <span>🔍</span>
+                        <i class="fa-solid fa-magnifying-glass text-neutral-400"></i>
                         <span>Mahsulotlarni qidirish...</span>
                     </div>
                 </div>
 
                 <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
                     <div class="bg-[#F4F4F6] rounded-2xl p-5 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-[#8B5CF6] text-white flex items-center justify-center text-xl">⚡</div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#8B5CF6] text-white flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-bolt"></i>
+                        </div>
                         <div>
                             <p class="text-xs text-neutral-500">Yetkazib berish</p>
                             <p class="text-lg font-extrabold text-[#111113]">24 soat ichida</p>
@@ -374,7 +382,9 @@
                     </div>
 
                     <div class="bg-[#F4F4F6] rounded-2xl p-5 flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-2xl bg-[#F96248] text-white flex items-center justify-center text-xl">🛡️</div>
+                        <div class="w-12 h-12 rounded-2xl bg-[#F96248] text-white flex items-center justify-center text-xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
                         <div>
                             <p class="text-xs text-neutral-500">Rasmiy kafolat</p>
                             <p class="text-lg font-extrabold text-[#111113]">100% Original</p>
@@ -403,22 +413,23 @@
                         Barcha bo‘limlar bo‘yicha saralangan sifatli mahsulotlar to‘plami.
                     </p>
                 </div>
-                <a href="{% url 'categories:list' %}" class="bg-white border border-black/10 hover:bg-[#111113] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition">
-                    Barcha kategoriyalar →
+                <a href="{% url 'categories:list' %}" class="bg-white border border-black/10 hover:bg-[#111113] hover:text-white text-xs font-bold px-5 py-2.5 rounded-full transition flex items-center gap-1.5">
+                    <span>Barcha kategoriyalar</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
 
             <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
                 {% for category in categories %}
                 <a href="{% url 'products:list' %}?category={{ category.id }}" class="bento-card p-5 flex flex-col justify-between h-40 hover:-translate-y-1 transition group">
-                    <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-xl group-hover:bg-[#8B5CF6] group-hover:text-white transition">
-                        {% if "apple" in category.name|lower or "telefon" in category.name|lower %}📱
-                        {% elif "mebel" in category.name|lower %}🛋️
-                        {% elif "kiyim" in category.name|lower %}👕
-                        {% elif "poyabzal" in category.name|lower %}👟
-                        {% elif "turizm" in category.name|lower or "baliq" in category.name|lower %}🏕️
-                        {% elif "texnika" in category.name|lower %}📺
-                        {% else %}📦{% endif %}
+                    <span class="w-10 h-10 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-lg group-hover:bg-[#8B5CF6] group-hover:text-white transition">
+                        {% if "apple" in category.name|lower or "telefon" in category.name|lower %}<i class="fa-solid fa-mobile-screen-button"></i>
+                        {% elif "mebel" in category.name|lower %}<i class="fa-solid fa-couch"></i>
+                        {% elif "kiyim" in category.name|lower %}<i class="fa-solid fa-shirt"></i>
+                        {% elif "poyabzal" in category.name|lower %}<i class="fa-solid fa-shoe-prints"></i>
+                        {% elif "turizm" in category.name|lower or "baliq" in category.name|lower %}<i class="fa-solid fa-campground"></i>
+                        {% elif "texnika" in category.name|lower %}<i class="fa-solid fa-tv"></i>
+                        {% else %}<i class="fa-solid fa-box-open"></i>{% endif %}
                     </span>
                     <div>
                         <h3 class="font-bold text-sm text-[#111113]">{{ category.name }}</h3>
@@ -442,8 +453,9 @@
                     </h2>
                     <p class="text-xs text-neutral-500 mt-1">Eng ko‘p xarid qilinayotgan top modellar</p>
                 </div>
-                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition">
-                    Barchasi →
+                <a href="{% url 'products:list' %}" class="bg-[#111113] text-white text-xs font-bold px-5 py-2.5 rounded-full hover:bg-neutral-800 transition flex items-center gap-1.5">
+                    <span>Barchasi</span>
+                    <i class="fa-solid fa-arrow-right text-[10px]"></i>
                 </a>
             </div>
 
@@ -463,7 +475,10 @@
                             </span>
                         </a>
                         <div class="mt-4 px-1">
-                            <span class="text-[11px] font-semibold text-[#8B5CF6]">{{ product.category.name }}</span>
+                            <div class="flex items-center gap-1.5 text-[11px] font-bold text-[#8B5CF6] mb-1">
+                                <i class="fa-solid fa-tag text-[10px]"></i>
+                                <span>{{ product.category.name }}</span>
+                            </div>
                             <h3 class="font-extrabold text-base text-[#111113] group-hover:text-[#8B5CF6] transition-colors">
                                 <a href="{% url 'products:detail' product.id %}">
                                     {{ product.name }}
@@ -477,8 +492,9 @@
                         <div class="text-lg font-extrabold text-[#111113]">
                            {{ product.price }} <span class="text-xs font-semibold text-neutral-500">$</span>
                         </div>
-                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer">
-                            Savatga qo‘shish
+                        <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-cart-shopping text-xs"></i>
+                            <span>Savatga qo‘shish</span>
                         </button>
                     </div>
                 </article>
@@ -501,9 +517,7 @@
                 <div class="lg:col-span-2">
                     <a href="{% url 'core:home' %}" class="inline-flex items-center gap-2.5">
                         <span class="w-8 h-8 rounded-full bg-white text-[#111113] flex items-center justify-center">
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                            </svg>
+                            <i class="fa-solid fa-bag-shopping text-sm"></i>
                         </span>
                         <span class="font-extrabold text-lg tracking-tight text-white">Django Market</span>
                     </a>
@@ -533,9 +547,18 @@
                 <div>
                     <h4 class="font-bold text-white mb-3">Aloqa</h4>
                     <ul class="space-y-2 text-neutral-400">
-                        <li>info@djangomarket.uz</li>
-                        <li>+998 90 123 45 67</li>
-                        <li>Toshkent, O‘zbekiston</li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-envelope text-neutral-500"></i>
+                            <span>info@djangomarket.uz</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-phone text-neutral-500"></i>
+                            <span>+998 90 123 45 67</span>
+                        </li>
+                        <li class="flex items-center gap-2">
+                            <i class="fa-solid fa-location-dot text-neutral-500"></i>
+                            <span>Toshkent, O‘zbekiston</span>
+                        </li>
                     </ul>
                 </div>
             </div>

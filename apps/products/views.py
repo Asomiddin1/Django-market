@@ -6,6 +6,8 @@ from apps.categories.models import Category
 
 
 def product_list_view(request):
+    # select_related('category') orqali mahsulot bilan birga uning bog'liq kategoriyasi (Foreign Key)
+    # bitta SQL JOIN so'rovi orqali olinadi (N+1 query muammosini oldini oladi)
     products = Product.objects.select_related('category').all()
     categories = Category.objects.all()
 
@@ -44,8 +46,8 @@ def product_detail_view(request, pk):
     """
     product = get_object_or_404(Product.objects.select_related('category'), pk=pk)
 
-    # O'xshash mahsulotlar (bir xil kategoriyadagi boshqa mahsulotlar)
-    related_products = Product.objects.filter(
+    # O'xshash mahsulotlar (select_related orqali bog'liq kategoriya bilan birga olinadi)
+    related_products = Product.objects.select_related('category').filter(
         category=product.category
     ).exclude(pk=product.pk)[:4]
 

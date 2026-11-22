@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -60,9 +61,7 @@
             <!-- Chap: To'liq Django Market brend nomi -->
             <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group shrink-0">
                 <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                    </svg>
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
                 </span>
                 <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
                     Django Market
@@ -86,8 +85,9 @@
             </nav>
 
             <!-- O'ng: Bosh sahifaga qaytish -->
-            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition">
-                ← Bosh sahifaga
+            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left text-[11px]"></i>
+                <span>Bosh sahifaga</span>
             </a>
 
         </div>
@@ -103,8 +103,9 @@
 
                 <!-- Asosiy binafsha info-karta -->
                 <div class="rounded-[1.75rem] bg-[#8B5CF6] text-white p-7 sm:p-8 shadow-lg shadow-[#8B5CF6]/15">
-                    <span class="inline-block bg-white/15 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full">
-                        24/7 Qo‘llab-quvvatlash
+                    <span class="inline-flex items-center gap-1.5 bg-white/15 text-white text-[11px] font-bold px-3.5 py-1.5 rounded-full">
+                        <i class="fa-solid fa-headset"></i>
+                        <span>24/7 Qo‘llab-quvvatlash</span>
                     </span>
 
                     <h1 class="mt-4 text-3xl sm:text-4xl font-extrabold tracking-tight leading-[1.12]">
@@ -119,8 +120,8 @@
                 <!-- Aloqa kanallari (2 ta kichik Bento karta) -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-4">
                     <div class="bento-card p-5 flex items-center gap-4">
-                        <div class="w-11 h-11 rounded-2xl bg-[#F96248]/10 text-[#F96248] flex items-center justify-center text-lg shrink-0">
-                            📞
+                        <div class="w-11 h-11 rounded-2xl bg-[#F96248]/10 text-[#F96248] flex items-center justify-center text-base shrink-0">
+                            <i class="fa-solid fa-phone"></i>
                         </div>
                         <div>
                             <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Telefon raqam</p>
@@ -129,8 +130,8 @@
                     </div>
 
                     <div class="bento-card p-5 flex items-center gap-4">
-                        <div class="w-11 h-11 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-lg shrink-0">
-                            ✉️
+                        <div class="w-11 h-11 rounded-2xl bg-[#8B5CF6]/10 text-[#8B5CF6] flex items-center justify-center text-base shrink-0">
+                            <i class="fa-solid fa-envelope"></i>
                         </div>
                         <div>
                             <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Elektron pochta</p>
@@ -139,8 +140,8 @@
                     </div>
 
                     <div class="bento-card p-5 flex items-center gap-4">
-                        <div class="w-11 h-11 rounded-2xl bg-[#111113] text-white flex items-center justify-center text-lg shrink-0">
-                            📍
+                        <div class="w-11 h-11 rounded-2xl bg-[#111113] text-white flex items-center justify-center text-base shrink-0">
+                            <i class="fa-solid fa-location-dot"></i>
                         </div>
                         <div>
                             <p class="text-[11px] font-semibold text-neutral-400 uppercase tracking-wider">Manzil</p>
@@ -226,7 +227,7 @@
                         <button type="submit"
                                 class="w-full bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs sm:text-sm font-bold py-4 px-6 rounded-full shadow-sm transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2">
                             <span>Xabarni yuborish</span>
-                            <span>→</span>
+                            <i class="fa-solid fa-paper-plane text-xs"></i>
                         </button>
                     </div>
 

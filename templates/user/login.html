@@ -11,6 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
@@ -36,17 +37,16 @@
         <div class="max-w-6xl mx-auto px-4 sm:px-6 flex items-center justify-between">
             <a href="{% url 'core:home' %}" class="flex items-center gap-2.5 group">
                 <span class="w-9 h-9 rounded-full bg-[#111113] text-white flex items-center justify-center shadow-sm group-hover:bg-[#8B5CF6] transition-colors">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                    </svg>
+                    <i class="fa-solid fa-bag-shopping text-sm"></i>
                 </span>
                 <span class="text-base sm:text-lg font-extrabold tracking-tight text-[#111113]">
                     Django Market
                 </span>
             </a>
 
-            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition">
-                ← Bosh sahifaga
+            <a href="{% url 'core:home' %}" class="bg-white hover:bg-[#111113] hover:text-white text-[#111113] border border-black/10 text-xs font-bold px-4 py-2.5 rounded-full transition flex items-center gap-1.5">
+                <i class="fa-solid fa-arrow-left text-[11px]"></i>
+                <span>Bosh sahifaga</span>
             </a>
         </div>
     </header>
@@ -74,7 +74,9 @@
                 <!-- Pastki ma'lumot mini-kartochkalari -->
                 <div class="relative z-10 mt-8 space-y-2.5">
                     <div class="bg-white/12 backdrop-blur-xs rounded-2xl p-3.5 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-xl bg-white text-[#8B5CF6] flex items-center justify-center text-sm font-bold shrink-0">🛡️</span>
+                        <span class="w-8 h-8 rounded-xl bg-white text-[#8B5CF6] flex items-center justify-center text-sm font-bold shrink-0">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </span>
                         <div class="text-xs">
                             <p class="font-bold text-white">Xavfsiz kirish</p>
                             <p class="text-purple-100/80 text-[11px]">Ma’lumotlaringiz himoyalangan</p>
@@ -82,7 +84,9 @@
                     </div>
 
                     <div class="bg-white/12 backdrop-blur-xs rounded-2xl p-3.5 flex items-center gap-3">
-                        <span class="w-8 h-8 rounded-xl bg-[#F96248] text-white flex items-center justify-center text-sm font-bold shrink-0">🚚</span>
+                        <span class="w-8 h-8 rounded-xl bg-[#F96248] text-white flex items-center justify-center text-sm font-bold shrink-0">
+                            <i class="fa-solid fa-truck-fast"></i>
+                        </span>
                         <div class="text-xs">
                             <p class="font-bold text-white">Buyurtma holati</p>
                             <p class="text-purple-100/80 text-[11px]">Yetkazib berishni real vaqtda kuzating</p>
@@ -174,10 +178,7 @@
                                 aria-label="Parolni ko‘rsatish"
                                 class="absolute right-3.5 top-1/2 -translate-y-1/2 text-neutral-400 hover:text-[#111113] p-1 transition cursor-pointer"
                             >
-                                <svg id="eye-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"/>
-                                </svg>
+                                <i id="eye-icon" class="fa-solid fa-eye text-xs"></i>
                             </button>
                         </div>
 
@@ -215,7 +216,7 @@
                             class="w-full bg-[#111113] hover:bg-[#8B5CF6] text-white text-xs sm:text-sm font-bold py-3.5 px-6 rounded-full shadow-sm transition-colors duration-300 cursor-pointer flex items-center justify-center gap-2"
                         >
                             <span>Tizimga kirish</span>
-                            <span>→</span>
+                            <i class="fa-solid fa-arrow-right-to-bracket text-xs"></i>
                         </button>
                     </div>
 
@@ -246,11 +247,15 @@
     <script>
         const toggleBtn = document.getElementById('toggle-password');
         const passwordInput = document.getElementById('id_password');
+        const eyeIcon = document.getElementById('eye-icon');
 
         if (toggleBtn && passwordInput) {
             toggleBtn.addEventListener('click', () => {
                 const isPassword = passwordInput.type === 'password';
                 passwordInput.type = isPassword ? 'text' : 'password';
+                if (eyeIcon) {
+                    eyeIcon.className = isPassword ? 'fa-solid fa-eye-slash text-xs' : 'fa-solid fa-eye text-xs';
+                }
                 toggleBtn.classList.toggle('text-[#8B5CF6]', isPassword);
             });
         }
