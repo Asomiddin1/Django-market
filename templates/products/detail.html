@@ -60,10 +60,10 @@
 
             <!-- O'ng: Savat, Sevimlilar va Profil -->
             <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
-                <a href="#" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+                <a href="{% url 'cart:detail' %}" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Savat</span>
-                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">2</span>
+                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">{{ cart|length }}</span>
                 </a>
                 <a href="{% url 'products:wishlist' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Mening sevimlilarim">
                     <span>Sevimlilar</span>
@@ -244,13 +244,13 @@
                             </div>
 
                             <!-- Savatga qo'shish -->
-                            <button
-                                type="button"
+                            <a
+                                href="{% url 'cart:add' product.id %}"
                                 class="flex-1 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-sm font-bold py-3.5 px-6 rounded-full shadow-sm hover:shadow-md transition-all duration-300 flex items-center justify-center gap-2 cursor-pointer"
                             >
                                 <i class="fa-solid fa-cart-shopping text-sm"></i>
                                 <span>Savatga qo‘shish</span>
-                            </button>
+                            </a>
 
                             <!-- Sevimlilarga qo'shish tugmasi -->
                             <a

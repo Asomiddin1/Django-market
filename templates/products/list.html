@@ -56,10 +56,10 @@
 
             <!-- O'ng: Savat, Sevimlilar va Bosh sahifa -->
             <div class="flex items-center gap-2.5 text-xs font-bold shrink-0">
-                <a href="#" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
+                <a href="{% url 'cart:detail' %}" class="bg-[#F96248] hover:bg-[#e5533a] text-white px-4 py-2.5 rounded-full shadow-xs transition flex items-center gap-1.5">
                     <i class="fa-solid fa-cart-shopping"></i>
                     <span>Savat</span>
-                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">2</span>
+                    <span class="bg-white/20 px-1.5 py-0.5 rounded-full text-[10px]">{{ cart|length }}</span>
                 </a>
                 <a href="{% url 'products:wishlist' %}" class="bg-white hover:bg-neutral-100 text-[#111113] border border-black/10 px-4 py-2.5 rounded-full transition flex items-center gap-1.5" title="Mening sevimlilarim">
                     <span>Sevimlilar</span>
@@ -212,10 +212,10 @@
                             <span>{% if product.stock > 0 %}Mavjud: {{ product.stock }}{% else %}Tugagan{% endif %}</span>
                         </div>
                     </div>
-                    <button type="button" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer shadow-xs flex items-center justify-center gap-2">
+                    <a href="{% url 'cart:add' product.id %}" class="w-full mt-3 bg-[#8B5CF6] hover:bg-[#7c4dff] text-white text-xs font-bold py-3 rounded-full transition cursor-pointer shadow-xs flex items-center justify-center gap-2">
                         <i class="fa-solid fa-cart-shopping text-xs"></i>
                         <span>Savatga qo‘shish</span>
-                    </button>
+                    </a>
                 </div>
             </article>
             {% empty %}

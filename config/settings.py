@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.users',
     'apps.categories',
     'apps.products',
+    'apps.cart',
     'rest_framework',
 ]
 
@@ -73,6 +74,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'apps.cart.context_processors.cart',
             ],
         },
     },
